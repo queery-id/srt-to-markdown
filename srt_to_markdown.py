@@ -3,6 +3,7 @@
 SRT to Markdown Converter for NotebookLM
 =========================================
 Converts Udeler course SRT files into clean Markdown documents.
+Now includes course resources (PDF, SQL, ZIP, etc.) for complete context.
 
 Usage:
     python srt_to_markdown.py                           # Process default Udeler folder
@@ -16,12 +17,29 @@ import re
 import argparse
 from pathlib import Path
 from datetime import datetime
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict
 
 
 # Default paths
 DEFAULT_INPUT = r"C:\Users\HYPE\Downloads\Udeler"
 DEFAULT_OUTPUT = Path(__file__).parent / "output"
+
+# Resource file extensions to detect
+RESOURCE_EXTENSIONS = {
+    'pdf': {'icon': '📄', 'category': 'Documentation', 'desc': 'PDF document'},
+    'sql': {'icon': '🗃️', 'category': 'Database', 'desc': 'SQL script'},
+    'zip': {'icon': '📦', 'category': 'Project Files', 'desc': 'Archive/project files'},
+    'html': {'icon': '🔗', 'category': 'Links', 'desc': 'Web resource/quiz'},
+    'xlsx': {'icon': '📊', 'category': 'Spreadsheet', 'desc': 'Excel spreadsheet'},
+    'xls': {'icon': '📊', 'category': 'Spreadsheet', 'desc': 'Excel spreadsheet'},
+    'csv': {'icon': '📊', 'category': 'Data', 'desc': 'CSV data file'},
+    'json': {'icon': '📋', 'category': 'Data', 'desc': 'JSON data file'},
+    'py': {'icon': '🐍', 'category': 'Code', 'desc': 'Python script'},
+    'ipynb': {'icon': '📓', 'category': 'Code', 'desc': 'Jupyter notebook'},
+    'txt': {'icon': '📝', 'category': 'Text', 'desc': 'Text file'},
+    'docx': {'icon': '📄', 'category': 'Documentation', 'desc': 'Word document'},
+    'pptx': {'icon': '📽️', 'category': 'Presentation', 'desc': 'PowerPoint presentation'},
+}
 
 
 def parse_srt_file(srt_path: Path) -> str:
@@ -99,19 +117,91 @@ def get_clean_name(name: str) -> str:
     return re.sub(r'^\d+\.\s*', '', name)
 
 
+def get_resource_description(filename: str) -> str:
+    """Generate a descriptive label based on filename patterns."""
+    name_lower = filename.lower()
+    
+    # Common patterns
+    if 'solution' in name_lower:
+        return "Solution/Answer key"
+    elif 'project' in name_lower:
+        return "Project files"
+    elif 'quiz' in name_lower:
+        return "Quiz/Assessment"
+    elif 'resource' in name_lower or 'download' in name_lower:
+        return "Downloadable resources"
+    elif 'slide' in name_lower or 'presentation' in name_lower:
+        return "Presentation slides"
+    elif 'cheat' in name_lower or 'sheet' in name_lower:
+        return "Cheat sheet/Reference"
+    elif 'checklist' in name_lower:
+        return "Checklist"
+    elif 'template' in name_lower:
+        return "Template"
+    elif 'script' in name_lower:
+        return "Script file"
+    elif 'data' in name_lower or 'dataset' in name_lower:
+        return "Dataset"
+    elif 'bonus' in name_lower:
+        return "Bonus content"
+    elif 'read' in name_lower and 'me' in name_lower:
+        return "Important notes"
+    elif 'create' in name_lower or 'setup' in name_lower or 'install' in name_lower:
+        return "Setup/Installation"
+    
+    return None
+
+
+def scan_resources(section_dir: Path) -> List[Dict]:
+    """Scan a section directory for resource files (non-SRT files)."""
+    resources = []
+    
+    for file_path in section_dir.iterdir():
+        if file_path.is_file():
+            ext = file_path.suffix.lower().lstrip('.')
+            
+            # Skip SRT files (handled separately)
+            if ext == 'srt':
+                continue
+            
+            # Check if it's a recognized resource type
+            if ext in RESOURCE_EXTENSIONS:
+                res_info = RESOURCE_EXTENSIONS[ext]
+                
+                # Generate description
+                custom_desc = get_resource_description(file_path.stem)
+                description = custom_desc if custom_desc else res_info['desc']
+                
+                resources.append({
+                    'name': file_path.name,
+                    'extension': ext.upper(),
+                    'icon': res_info['icon'],
+                    'category': res_info['category'],
+                    'description': description,
+                    'size_kb': round(file_path.stat().st_size / 1024, 1)
+                })
+    
+    # Sort resources by name
+    resources.sort(key=lambda x: natural_sort_key(x['name']))
+    
+    return resources
+
+
 def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
     """
     Scan a course folder and return structured data.
     
     Returns:
         course_name: Name of the course
-        sections: List of sections with lectures
+        sections: List of sections with lectures and resources
         metadata: Course statistics
     """
     course_name = course_path.name
     sections = []
     total_lectures = 0
     total_srt_files = 0
+    total_resources = 0
+    resource_summary = {}  # Count by category
     
     # Get all subdirectories (sections)
     section_dirs = sorted(
@@ -143,17 +233,30 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
             
             total_lectures += 1
         
-        if lectures:  # Only add sections that have content
+        # Scan for resources in this section
+        resources = scan_resources(section_dir)
+        total_resources += len(resources)
+        
+        # Update resource summary
+        for res in resources:
+            cat = res['category']
+            resource_summary[cat] = resource_summary.get(cat, 0) + 1
+        
+        # Add section if it has content OR resources
+        if lectures or resources:
             sections.append({
                 'name': section_name,
                 'clean_name': get_clean_name(section_name),
-                'lectures': lectures
+                'lectures': lectures,
+                'resources': resources
             })
     
     metadata = {
         'course_name': course_name,
         'total_sections': len(sections),
         'total_lectures': total_srt_files,
+        'total_resources': total_resources,
+        'resource_summary': resource_summary,
         'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
         'source_path': str(course_path)
     }
@@ -175,9 +278,18 @@ def generate_markdown(course_name: str, sections: List[dict], metadata: dict) ->
     lines.append("")
     lines.append(f"- **Sections:** {metadata['total_sections']}")
     lines.append(f"- **Lectures:** {metadata['total_lectures']}")
+    lines.append(f"- **Resources:** {metadata['total_resources']} files")
     lines.append(f"- **Generated:** {metadata['generated_date']}")
-    lines.append(f"- **Source:** `{metadata['source_path']}`")
     lines.append("")
+    
+    # Resource summary by category
+    if metadata['resource_summary']:
+        lines.append("### Available Resources")
+        lines.append("")
+        for category, count in sorted(metadata['resource_summary'].items()):
+            lines.append(f"- {category}: {count} file(s)")
+        lines.append("")
+    
     lines.append("---")
     lines.append("")
     
@@ -187,7 +299,9 @@ def generate_markdown(course_name: str, sections: List[dict], metadata: dict) ->
     for i, section in enumerate(sections, 1):
         section_anchor = section['clean_name'].lower().replace(' ', '-').replace('&', 'and')
         section_anchor = re.sub(r'[^a-z0-9\-]', '', section_anchor)
-        lines.append(f"{i}. [{section['name']}](#{section_anchor})")
+        res_count = len(section.get('resources', []))
+        res_badge = f" 📎{res_count}" if res_count > 0 else ""
+        lines.append(f"{i}. [{section['name']}](#{section_anchor}){res_badge}")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -197,11 +311,28 @@ def generate_markdown(course_name: str, sections: List[dict], metadata: dict) ->
         lines.append(f"## {section['name']}")
         lines.append("")
         
-        for lecture in section['lectures']:
-            lines.append(f"### {lecture['name']}")
+        # Show resources for this section FIRST (important for context)
+        resources = section.get('resources', [])
+        if resources:
+            lines.append("### 📚 Section Resources")
             lines.append("")
-            lines.append(lecture['content'])
+            lines.append("| File | Type | Description |")
+            lines.append("|------|------|-------------|")
+            for res in resources:
+                size_str = f" ({res['size_kb']} KB)" if res['size_kb'] > 100 else ""
+                lines.append(f"| {res['icon']} {res['name']} | {res['extension']} | {res['description']}{size_str} |")
             lines.append("")
+        
+        # Then show transcript content
+        if section['lectures']:
+            lines.append("### 📝 Lecture Transcripts")
+            lines.append("")
+            
+            for lecture in section['lectures']:
+                lines.append(f"#### {lecture['name']}")
+                lines.append("")
+                lines.append(lecture['content'])
+                lines.append("")
         
         lines.append("---")
         lines.append("")
@@ -217,10 +348,10 @@ def process_course(course_path: Path, output_dir: Path) -> Optional[Path]:
     course_name, sections, metadata = scan_course(course_path)
     
     if not sections:
-        print(f"  ⚠️ No SRT files found, skipping...")
+        print(f"  ⚠️ No content found, skipping...")
         return None
     
-    print(f"  📂 Found {metadata['total_sections']} sections, {metadata['total_lectures']} lectures")
+    print(f"  📂 Found {metadata['total_sections']} sections, {metadata['total_lectures']} lectures, {metadata['total_resources']} resources")
     
     # Generate Markdown
     markdown_content = generate_markdown(course_name, sections, metadata)
@@ -280,7 +411,8 @@ Examples:
     output_path = Path(args.output)
     
     print("=" * 60)
-    print("🔄 SRT to Markdown Converter for NotebookLM")
+    print("🔄 SRT to Markdown Converter for NotebookLM v2.0")
+    print("   Now with Resource Detection!")
     print("=" * 60)
     print(f"📁 Input:  {input_path}")
     print(f"📁 Output: {output_path}")
@@ -306,6 +438,7 @@ Examples:
     
     # Process each course
     processed = []
+    total_resources = 0
     for course_path in courses:
         result = process_course(course_path, output_path)
         if result:
