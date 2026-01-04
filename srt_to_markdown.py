@@ -191,6 +191,10 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
     """
     Scan a course folder and return structured data.
     
+    Supports two folder structures:
+    1. Hierarchical: Course → Section folders → .srt files
+    2. Flat: Course → .srt files directly (no section subfolders)
+    
     Returns:
         course_name: Name of the course
         sections: List of sections with lectures and resources
@@ -203,12 +207,54 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
     total_resources = 0
     resource_summary = {}  # Count by category
     
-    # Get all subdirectories (sections)
+    # Check if there are SRT files directly in the course folder (flat structure)
+    root_srt_files = sorted(
+        list(course_path.glob("*.srt")),
+        key=lambda x: natural_sort_key(x.name)
+    )
+    
+    # Get all subdirectories (potential sections)
     section_dirs = sorted(
         [d for d in course_path.iterdir() if d.is_dir()],
         key=lambda x: natural_sort_key(x.name)
     )
     
+    # If there are SRT files in root, treat them as a single "Main Content" section
+    if root_srt_files:
+        lectures = []
+        
+        for srt_file in root_srt_files:
+            lecture_name = srt_file.stem  # filename without extension
+            content = parse_srt_file(srt_file)
+            
+            if content:
+                lectures.append({
+                    'name': lecture_name,
+                    'clean_name': get_clean_name(lecture_name),
+                    'content': content
+                })
+                total_srt_files += 1
+            
+            total_lectures += 1
+        
+        # Scan for resources in course root
+        resources = scan_resources(course_path)
+        total_resources += len(resources)
+        
+        # Update resource summary
+        for res in resources:
+            cat = res['category']
+            resource_summary[cat] = resource_summary.get(cat, 0) + 1
+        
+        if lectures or resources:
+            sections.append({
+                'name': 'Course Content',
+                'clean_name': 'Course Content',
+                'lectures': lectures,
+                'resources': resources
+            })
+    
+    # Process subdirectories (sections)
     for section_dir in section_dirs:
         section_name = section_dir.name
         lectures = []
