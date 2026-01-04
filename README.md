@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Version](https://img.shields.io/badge/Version-2.0-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)
 
 Convert SRT subtitle files from online courses (Udemy, Coursera, etc.) into clean Markdown documents for **NotebookLM**, **Obsidian**, or any knowledge base.
@@ -11,16 +12,30 @@ Convert SRT subtitle files from online courses (Udemy, Coursera, etc.) into clea
 - 🔄 **Batch Processing** - Convert all courses at once
 - 📝 **Clean Extraction** - Removes timestamps & line numbers automatically
 - 📂 **Structure Preservation** - Maintains course → section → lecture hierarchy
-- 📊 **Auto Metadata** - Generates section/lecture counts and timestamps
-- 📖 **Table of Contents** - Clickable navigation links
+- 📊 **Auto Metadata** - Generates section/lecture/resource counts
+- 📖 **Table of Contents** - Clickable navigation links with resource badges
 - 🎯 **Custom Paths** - Flexible input/output folder configuration
 - ⚡ **No Dependencies** - Pure Python standard library
+
+### 🆕 v2.0: Resource Detection
+
+Automatically detects and lists course resources per section:
+
+| Type | Icon | Examples |
+|------|------|----------|
+| PDF | � | Slides, cheatsheets, checklists |
+| SQL | 🗃️ | Database scripts, solutions |
+| ZIP | �📦 | Project files, templates |
+| HTML | 🔗 | Quizzes, resource links |
+| Excel/CSV | 📊 | Datasets, spreadsheets |
+| Python | 🐍 | Script files |
+| Jupyter | 📓 | Notebooks |
 
 ## 📦 Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/srt-to-markdown.git
+git clone https://github.com/queery-id/srt-to-markdown.git
 cd srt-to-markdown
 
 # No dependencies needed - just Python 3.7+
@@ -53,6 +68,8 @@ courses/
 │   ├── 1. Section Name/
 │   │   ├── 1. Lecture.srt
 │   │   ├── 2. Lecture.srt
+│   │   ├── resources.pdf      # ← Auto-detected
+│   │   ├── project.zip        # ← Auto-detected
 │   │   └── ...
 │   ├── 2. Section Name/
 │   │   └── ...
@@ -69,23 +86,37 @@ courses/
 ## Course Information
 - **Sections:** 28
 - **Lectures:** 291
-- **Generated:** 2026-01-03 22:27
+- **Resources:** 45 files
+
+### Available Resources
+- Documentation: 12 file(s)
+- Database: 8 file(s)
+- Project Files: 5 file(s)
 
 ---
 
 ## Table of Contents
-1. Introduction
-2. Getting Started
+1. Introduction 📎3
+2. Getting Started 📎5
 ...
 
 ---
 
 ## 1. Introduction
 
-### 1. Welcome
+### 📚 Section Resources
+| File | Type | Description |
+|------|------|-------------|
+| 📦 sql-project.zip | ZIP | Project files |
+| 📄 slides.pdf | PDF | Presentation slides |
+| 🗃️ setup.sql | SQL | Setup/Installation |
+
+### 📝 Lecture Transcripts
+
+#### 1. Welcome
 Hello and welcome to this course...
 
-### 2. Course Overview
+#### 2. Course Overview
 In this section we will cover...
 ```
 
@@ -93,8 +124,8 @@ In this section we will cover...
 
 - **NotebookLM** - Upload markdown files as sources for AI-powered Q&A
 - **Obsidian** - Build a searchable knowledge base from courses
-- **Custom GPT** - Create training data for course-specific assistants
-- **Study Notes** - Quick reference for course content
+- **Custom GPT** - Create training data for course-specific assistants (with full resource context!)
+- **Study Notes** - Quick reference for course content and materials
 
 ## 📝 License
 
@@ -107,4 +138,3 @@ MIT License - see [LICENSE](LICENSE) for details.
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
