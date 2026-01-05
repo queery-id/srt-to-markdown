@@ -191,9 +191,8 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
     """
     Scan a course folder and return structured data.
     
-    Supports two folder structures:
-    1. Hierarchical: Course → Section folders → .srt files
-    2. Flat: Course → .srt files directly (no section subfolders)
+    Supports any folder depth by recursively finding all SRT files.
+    Works with: Udeler, Coursera, LinkedIn Learning, Udemy downloaded, etc.
     
     Returns:
         course_name: Name of the course
@@ -202,28 +201,54 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
     """
     course_name = course_path.name
     sections = []
-    total_lectures = 0
     total_srt_files = 0
     total_resources = 0
     resource_summary = {}  # Count by category
     
-    # Check if there are SRT files directly in the course folder (flat structure)
-    root_srt_files = sorted(
-        list(course_path.glob("*.srt")),
-        key=lambda x: natural_sort_key(x.name)
+    # Recursively find ALL SRT files in the course folder (any depth)
+    all_srt_files = sorted(
+        list(course_path.rglob("*.srt")),
+        key=lambda x: natural_sort_key(str(x))
     )
     
-    # Get all subdirectories (potential sections)
-    section_dirs = sorted(
-        [d for d in course_path.iterdir() if d.is_dir()],
-        key=lambda x: natural_sort_key(x.name)
-    )
+    if not all_srt_files:
+        return course_name, [], {'course_name': course_name, 'total_sections': 0, 
+                                  'total_lectures': 0, 'total_resources': 0,
+                                  'resource_summary': {}, 
+                                  'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
+                                  'source_path': str(course_path)}
     
-    # If there are SRT files in root, treat them as a single "Main Content" section
-    if root_srt_files:
+    # Group SRT files by their parent folder
+    # This creates sections based on the folder where SRT files are located
+    folder_groups = {}
+    for srt_file in all_srt_files:
+        parent = srt_file.parent
+        if parent not in folder_groups:
+            folder_groups[parent] = []
+        folder_groups[parent].append(srt_file)
+    
+    # Sort folders by their path
+    sorted_folders = sorted(folder_groups.keys(), key=lambda x: natural_sort_key(str(x)))
+    
+    # Process each folder as a "section"
+    for folder_path in sorted_folders:
+        srt_files = folder_groups[folder_path]
         lectures = []
         
-        for srt_file in root_srt_files:
+        # Generate section name from relative path
+        try:
+            rel_path = folder_path.relative_to(course_path)
+            # Use the relative path parts as section name
+            if str(rel_path) == '.':
+                section_name = 'Course Content'
+            else:
+                # Join path parts with " → " for readability
+                section_name = ' → '.join(rel_path.parts)
+        except ValueError:
+            section_name = folder_path.name
+        
+        # Process SRT files in this folder
+        for srt_file in sorted(srt_files, key=lambda x: natural_sort_key(x.name)):
             lecture_name = srt_file.stem  # filename without extension
             content = parse_srt_file(srt_file)
             
@@ -234,53 +259,9 @@ def scan_course(course_path: Path) -> Tuple[str, List[dict], dict]:
                     'content': content
                 })
                 total_srt_files += 1
-            
-            total_lectures += 1
         
-        # Scan for resources in course root
-        resources = scan_resources(course_path)
-        total_resources += len(resources)
-        
-        # Update resource summary
-        for res in resources:
-            cat = res['category']
-            resource_summary[cat] = resource_summary.get(cat, 0) + 1
-        
-        if lectures or resources:
-            sections.append({
-                'name': 'Course Content',
-                'clean_name': 'Course Content',
-                'lectures': lectures,
-                'resources': resources
-            })
-    
-    # Process subdirectories (sections)
-    for section_dir in section_dirs:
-        section_name = section_dir.name
-        lectures = []
-        
-        # Get all SRT files in this section
-        srt_files = sorted(
-            list(section_dir.glob("*.srt")),
-            key=lambda x: natural_sort_key(x.name)
-        )
-        
-        for srt_file in srt_files:
-            lecture_name = srt_file.stem  # filename without extension
-            content = parse_srt_file(srt_file)
-            
-            if content:
-                lectures.append({
-                    'name': lecture_name,
-                    'clean_name': get_clean_name(lecture_name),
-                    'content': content
-                })
-                total_srt_files += 1
-            
-            total_lectures += 1
-        
-        # Scan for resources in this section
-        resources = scan_resources(section_dir)
+        # Scan for resources in this folder
+        resources = scan_resources(folder_path)
         total_resources += len(resources)
         
         # Update resource summary
