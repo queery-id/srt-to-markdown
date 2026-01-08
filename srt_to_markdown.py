@@ -102,6 +102,42 @@ def parse_srt_file(srt_path: Path) -> str:
         return ""
 
 
+def parse_plain_text(txt_path: Path) -> str:
+    """
+    Parse plain text transcript file (already cleaned, no timestamps).
+    Common for YouTube subtitle downloads from services like GetSubs.cc
+    """
+    try:
+        # Try UTF-8 first, then fall back to other encodings
+        encodings = ['utf-8', 'utf-8-sig', 'latin-1', 'cp1252']
+        content = None
+        
+        for encoding in encodings:
+            try:
+                with open(txt_path, 'r', encoding=encoding) as f:
+                    content = f.read()
+                break
+            except UnicodeDecodeError:
+                continue
+        
+        if content is None:
+            print(f"  ⚠️ Could not decode: {txt_path.name}")
+            return ""
+        
+        # Remove BOM if present
+        content = content.lstrip('\ufeff')
+        
+        # Clean up multiple spaces and newlines
+        content = re.sub(r'\n\s*\n', '\n\n', content)  # Normalize paragraph breaks
+        content = re.sub(r' +', ' ', content)  # Remove multiple spaces
+        
+        return content.strip()
+        
+    except Exception as e:
+        print(f"  ⚠️ Error parsing {txt_path.name}: {e}")
+        return ""
+
+
 def natural_sort_key(s: str) -> List:
     """
     Sort strings with numbers naturally.
@@ -398,16 +434,186 @@ def process_course(course_path: Path, output_dir: Path) -> Optional[Path]:
     return output_file
 
 
+def scan_youtube_collection(folder_path: Path) -> Tuple[str, List[dict], dict]:
+    """
+    Scan a YouTube video collection folder (flat SRT/TXT files).
+    
+    Returns:
+        topic_name: Name of the topic/collection
+        videos: List of video transcripts
+        metadata: Collection statistics
+    """
+    topic_name = folder_path.name
+    videos = []
+    
+    # Find all SRT and TXT files directly in this folder
+    srt_files = sorted(
+        list(folder_path.glob("*.srt")) + list(folder_path.glob("*.txt")),
+        key=lambda x: natural_sort_key(x.name)
+    )
+    
+    if not srt_files:
+        return topic_name, [], {
+            'topic_name': topic_name,
+            'total_videos': 0,
+            'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
+            'source_path': str(folder_path)
+        }
+    
+    # Process each SRT/TXT file as a video
+    for srt_file in srt_files:
+        video_title = srt_file.stem
+        
+        # Use appropriate parser based on file extension
+        if srt_file.suffix.lower() == '.srt':
+            content = parse_srt_file(srt_file)
+        else:  # .txt or other
+            content = parse_plain_text(srt_file)
+        
+        if content:
+            # Extract potential creator from filename
+            # Common patterns: "Creator - Title", "Title [Creator]", etc.
+            creator = "Unknown"
+            if " - " in video_title:
+                parts = video_title.split(" - ", 1)
+                creator = parts[0].strip()
+            elif "[" in video_title and "]" in video_title:
+                match = re.search(r'\[([^\]]+)\]', video_title)
+                if match:
+                    creator = match.group(1).strip()
+            
+            videos.append({
+                'title': video_title,
+                'creator': creator,
+                'content': content,
+                'filename': srt_file.name
+            })
+    
+    metadata = {
+        'topic_name': topic_name,
+        'total_videos': len(videos),
+        'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
+        'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M'),
+        'source_path': str(folder_path)
+    }
+    
+    return topic_name, videos, metadata
+
+
+def generate_youtube_markdown(topic_name: str, videos: List[dict], metadata: dict) -> str:
+    """Generate Markdown content for YouTube video collection."""
+    
+    lines = []
+    
+    # Header
+    lines.append(f"# {topic_name} - Knowledge Base")
+    lines.append("")
+    lines.append("*YouTube Video Collection for Custom GPT*")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    
+    # Collection Info
+    lines.append("## 📊 Collection Information")
+    lines.append("")
+    lines.append(f"- **Topic:** {metadata['topic_name']}")
+    lines.append(f"- **Total Videos:** {metadata['total_videos']}")
+    lines.append(f"- **Last Updated:** {metadata['last_updated']}")
+    lines.append(f"- **Generated:** {metadata['generated_date']}")
+    lines.append("")
+    
+    # Extract unique creators
+    creators = set(v['creator'] for v in videos if v['creator'] != 'Unknown')
+    if creators:
+        lines.append(f"- **Contributors:** {', '.join(sorted(creators))}")
+        lines.append("")
+    
+    lines.append("---")
+    lines.append("")
+    
+    # Table of Contents
+    lines.append("## 📑 Table of Contents")
+    lines.append("")
+    for idx, video in enumerate(videos, 1):
+        lines.append(f"{idx}. [{video['title']}](#{idx}-{video['title'].lower().replace(' ', '-')})")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    
+    # Video Transcripts
+    lines.append("## 🎥 Video Transcripts")
+    lines.append("")
+    
+    for idx, video in enumerate(videos, 1):
+        lines.append(f"### {idx}. {video['title']}")
+        lines.append("")
+        
+        if video['creator'] != 'Unknown':
+            lines.append(f"**Creator:** {video['creator']}  ")
+        
+        lines.append(f"**Source:** `{video['filename']}`")
+        lines.append("")
+        lines.append("#### Transcript")
+        lines.append("")
+        lines.append(video['content'])
+        lines.append("")
+        lines.append("---")
+        lines.append("")
+    
+    # Footer
+    lines.append("## 📝 Notes")
+    lines.append("")
+    lines.append("This knowledge base was automatically generated from YouTube video subtitles.")
+    lines.append("Use this as a reference for Custom GPT or other AI assistants.")
+    lines.append("")
+    lines.append(f"*Generated on {metadata['generated_date']}*")
+    
+    return '\n'.join(lines)
+
+
+def process_youtube_collection(folder_path: Path) -> Optional[Path]:
+    """Process a single YouTube collection folder."""
+    
+    print(f"\n🎥 Processing: {folder_path.name}")
+    
+    # Scan collection
+    topic_name, videos, metadata = scan_youtube_collection(folder_path)
+    
+    if not videos:
+        print("  ⚠️ No SRT files found, skipping...")
+        return None
+    
+    print(f"  📂 Found {metadata['total_videos']} videos")
+    
+    # Generate Markdown
+    markdown_content = generate_youtube_markdown(topic_name, videos, metadata)
+    
+    # Save to same folder as input
+    safe_name = re.sub(r'[<>:"/\\|?*]', '', topic_name)
+    output_file = folder_path / f"{safe_name}.md"
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(markdown_content)
+    
+    print(f"  ✅ Saved: {output_file.name}")
+    
+    return output_file
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Convert SRT tutorial files to Markdown for NotebookLM",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
+  # Course Mode (default)
   python srt_to_markdown.py                              # Process all courses
   python srt_to_markdown.py -i "D:/MyCourses"            # Custom input folder
   python srt_to_markdown.py -o "D:/Output"               # Custom output folder  
   python srt_to_markdown.py -c "SQL Bootcamp"            # Single course only
+  
+  # YouTube Mode
+  python srt_to_markdown.py --youtube -i "D:/YouTube/Claude Code"   # Process YouTube collection
         """
     )
     
@@ -415,7 +621,7 @@ Examples:
         '-i', '--input',
         type=str,
         default=DEFAULT_INPUT,
-        help=f'Input folder containing courses (default: {DEFAULT_INPUT})'
+        help=f'Input folder containing courses or YouTube collections (default: {DEFAULT_INPUT})'
     )
     
     parser.add_argument(
@@ -432,11 +638,44 @@ Examples:
         help='Process only a specific course (partial name match)'
     )
     
+    parser.add_argument(
+        '--youtube',
+        action='store_true',
+        help='YouTube mode: Process flat SRT collections as knowledge base'
+    )
+    
     args = parser.parse_args()
     
     input_path = Path(args.input)
     output_path = Path(args.output)
     
+    # YouTube Mode
+    if args.youtube:
+        print("=" * 60)
+        print("🎥 YouTube to Knowledge Base Converter v3.0")
+        print("   For Custom GPT Training")
+        print("=" * 60)
+        print(f"📁 Input:  {input_path}")
+        
+        if not input_path.exists():
+            print(f"\n❌ Error: Input folder not found: {input_path}")
+            return
+        
+        # Process the folder as a YouTube collection
+        result = process_youtube_collection(input_path)
+        
+        if result:
+            print("\n" + "=" * 60)
+            print("✅ COMPLETE!")
+            print("=" * 60)
+            print(f"📄 Generated: {result.name}")
+            print(f"📁 Location: {result.parent}")
+        else:
+            print("\n❌ No SRT files found in the folder")
+        
+        return
+    
+    # Course Mode (default)
     print("=" * 60)
     print("🔄 SRT to Markdown Converter for NotebookLM v2.0")
     print("   Now with Resource Detection!")
