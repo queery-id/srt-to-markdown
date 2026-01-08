@@ -2,13 +2,14 @@
 
 ![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-2.0-orange.svg)
+![Version](https://img.shields.io/badge/Version-3.0-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)
 
-Convert SRT subtitle files from online courses (Udemy, Coursera, etc.) into clean Markdown documents for **NotebookLM**, **Obsidian**, or any knowledge base.
+Convert SRT subtitle files from online courses (Udemy, Coursera, etc.) **OR** YouTube video collections into clean Markdown documents for **NotebookLM**, **Custom GPT**, **Obsidian**, or any knowledge base.
 
 ## ✨ Features
 
+### 🎓 Course Mode (Default)
 - 🔄 **Batch Processing** - Convert all courses at once
 - 📝 **Clean Extraction** - Removes timestamps & line numbers automatically
 - 📂 **Structure Preservation** - Maintains course → section → lecture hierarchy
@@ -16,16 +17,25 @@ Convert SRT subtitle files from online courses (Udemy, Coursera, etc.) into clea
 - 📖 **Table of Contents** - Clickable navigation links with resource badges
 - 🎯 **Custom Paths** - Flexible input/output folder configuration
 - ⚡ **No Dependencies** - Pure Python standard library
+- 🔍 **Recursive Scanning** - Supports unlimited folder depth (Coursera, LinkedIn Learning, etc.)
 
-### 🆕 v2.0: Resource Detection
+### 🎥 YouTube Mode (v3.0 - NEW!)
+- 📹 **Video Collections** - Compile independent YouTube videos by topic
+- 🤖 **Custom GPT Ready** - Perfect format for training AI assistants
+- 👥 **Creator Detection** - Automatically extracts channel/creator names
+- 📝 **Plain Text Support** - Works with `.srt` and `.txt` subtitle downloads
+- 🔄 **Incremental Updates** - Re-run to add new videos to existing knowledge base
+- 📊 **Collection Stats** - Video count, contributors, last updated
+
+### 📦 v2.0: Resource Detection
 
 Automatically detects and lists course resources per section:
 
 | Type | Icon | Examples |
 |------|------|----------|
-| PDF | � | Slides, cheatsheets, checklists |
+| PDF | 📄 | Slides, cheatsheets, checklists |
 | SQL | 🗃️ | Database scripts, solutions |
-| ZIP | �📦 | Project files, templates |
+| ZIP | 📦 | Project files, templates |
 | HTML | 🔗 | Quizzes, resource links |
 | Excel/CSV | 📊 | Datasets, spreadsheets |
 | Python | 🐍 | Script files |
@@ -43,98 +53,167 @@ cd srt-to-markdown
 
 ## 🚀 Usage
 
+### Course Mode
+
 ```bash
 # Process all courses in default folder
 python srt_to_markdown.py
 
 # Custom input folder
-python srt_to_markdown.py -i "/path/to/courses"
+python srt_to_markdown.py -i "D:/MyCourses"
 
 # Custom output folder
-python srt_to_markdown.py -o "/path/to/output"
+python srt_to_markdown.py -o "D:/Output"
 
-# Process single course (partial name match)
+# Process single course
 python srt_to_markdown.py -c "SQL Bootcamp"
-
-# Combine options
-python srt_to_markdown.py -i "/courses" -o "/output" -c "Python"
 ```
 
-## 📁 Expected Input Structure
+### YouTube Mode
 
+```bash
+# Process YouTube video collection
+python srt_to_markdown.py --youtube -i "D:/YouTube/Claude Code"
+
+# Output will be saved in the same folder as input
+# Example: D:/YouTube/Claude Code/Claude Code.md
 ```
-courses/
-├── Course Name 1/
-│   ├── 1. Section Name/
-│   │   ├── 1. Lecture.srt
-│   │   ├── 2. Lecture.srt
-│   │   ├── resources.pdf      # ← Auto-detected
-│   │   ├── project.zip        # ← Auto-detected
-│   │   └── ...
-│   ├── 2. Section Name/
-│   │   └── ...
-│   └── ...
-├── Course Name 2/
-│   └── ...
+
+### Interactive Batch Runner (Windows)
+
+```cmd
+# Double-click or run:
+run.bat
+```
+
+## 📁 Folder Structure
+
+### Course Mode (Udeler, Coursera, etc.)
+```
+Input/
+├── Course 1/
+│   ├── Section 1/
+│   │   ├── Lecture 1.srt
+│   │   ├── Lecture 2.srt
+│   │   └── slides.pdf
+│   └── Section 2/
+│       └── Lecture 3.srt
+└── Course 2/
+    └── ...
+
+Output/
+├── Course 1.md
+└── Course 2.md
+```
+
+### YouTube Mode
+```
+Input/
+└── Claude Code/              ← Topic folder
+    ├── Video 1.srt
+    ├── Video 2.txt
+    └── Video 3.srt
+
+Output (same folder):
+└── Claude Code/
+    ├── Claude Code.md        ← Generated KB
+    ├── Video 1.srt
+    ├── Video 2.txt
+    └── Video 3.srt
 ```
 
 ## 📄 Output Format
 
+### Course Mode Example
 ```markdown
 # Course Name
 
 ## Course Information
-- **Sections:** 28
-- **Lectures:** 291
-- **Resources:** 45 files
-
-### Available Resources
-- Documentation: 12 file(s)
-- Database: 8 file(s)
-- Project Files: 5 file(s)
-
----
+- Total Sections: 5
+- Total Lectures: 42
+- Total Resources: 15
+- Generated: 2024-01-01
 
 ## Table of Contents
-1. Introduction 📎3
-2. Getting Started 📎5
-...
+1. [Section 1](#section-1) 📦 3 resources
+2. [Section 2](#section-2)
 
----
-
-## 1. Introduction
+## Section 1
 
 ### 📚 Section Resources
 | File | Type | Description |
 |------|------|-------------|
-| 📦 sql-project.zip | ZIP | Project files |
-| 📄 slides.pdf | PDF | Presentation slides |
-| 🗃️ setup.sql | SQL | Setup/Installation |
+| 📄 slides.pdf | pdf | Lecture slides |
 
 ### 📝 Lecture Transcripts
+#### Lecture 1
+[Clean transcript content...]
+```
 
-#### 1. Welcome
-Hello and welcome to this course...
+### YouTube Mode Example
+```markdown
+# Claude Code - Knowledge Base
 
-#### 2. Course Overview
-In this section we will cover...
+*YouTube Video Collection for Custom GPT*
+
+## 📊 Collection Information
+- **Topic:** Claude Code
+- **Total Videos:** 5
+- **Last Updated:** 2026-01-08
+- **Contributors:** Creator A, Creator B
+
+## 📑 Table of Contents
+1. [Video Title 1](#1-video-title-1)
+2. [Video Title 2](#2-video-title-2)
+
+## 🎥 Video Transcripts
+
+### 1. Video Title 1
+**Creator:** Creator A
+**Source:** `video1.srt`
+
+#### Transcript
+[Clean transcript content...]
 ```
 
 ## 🎯 Use Cases
 
-- **NotebookLM** - Upload markdown files as sources for AI-powered Q&A
-- **Obsidian** - Build a searchable knowledge base from courses
-- **Custom GPT** - Create training data for course-specific assistants (with full resource context!)
-- **Study Notes** - Quick reference for course content and materials
+### Course Mode
+- 📚 **NotebookLM** - Create AI-powered study assistants
+- 🧠 **Obsidian** - Build personal knowledge graphs
+- 🔍 **Search** - Full-text search across all courses
+- 📖 **Review** - Quick course content review
+- 🎓 **Study Notes** - Convert lectures to readable notes
+
+### YouTube Mode
+- 🤖 **Custom GPT** - Train AI on specific topics
+- 📚 **Knowledge Base** - Compile expert knowledge from multiple creators
+- 🔍 **Research** - Aggregate information on specific subjects
+- 📖 **Learning** - Create comprehensive topic guides
+- 🎯 **Topic Mastery** - Combine best tutorials on one subject
+
+## 🛠️ Advanced Features
+
+- **Encoding Support**: UTF-8, Latin-1, CP1252
+- **Natural Sorting**: "Section 2" before "Section 10"
+- **Clean Names**: Removes numbering prefixes
+- **Resource Descriptions**: Smart filename-based descriptions
+- **Recursive Scanning**: Handles any folder depth
+- **Creator Detection**: Extracts from filename patterns
 
 ## 📝 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions welcome! Please feel free to submit a Pull Request.
+
+## 🔗 Links
+
+- **Repository**: https://github.com/queery-id/srt-to-markdown
+- **Issues**: https://github.com/queery-id/srt-to-markdown/issues
+
+---
+
+Made with ❤️ for learners and knowledge builders
