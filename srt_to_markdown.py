@@ -14,6 +14,7 @@ Usage:
 
 import os
 import re
+import sys
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -646,6 +647,45 @@ Examples:
     
     args = parser.parse_args()
     
+    # Interactive Mode - Show menu if no arguments provided
+    if len(sys.argv) == 1:  # No arguments provided
+        print("=" * 60)
+        print("🎬 SRT to Markdown Converter v3.0")
+        print("=" * 60)
+        print("\nSelect Mode:")
+        print("  1. Course Mode (Udemy, Coursera, LinkedIn Learning)")
+        print("  2. YouTube Mode (Video Collections for Custom GPT)")
+        print("  3. Exit")
+        print()
+        
+        choice = input("Enter choice (1-3): ").strip()
+        
+        if choice == "3":
+            print("\n👋 Goodbye!")
+            return
+        elif choice == "2":
+            args.youtube = True
+        elif choice != "1":
+            print("\n❌ Invalid choice. Exiting.")
+            return
+        
+        # Get input folder
+        print("\n📂 Enter input folder path:")
+        if args.youtube:
+            print("   Example: C:\\Users\\HYPE\\Downloads\\Claude Code")
+        else:
+            print("   Example: C:\\Users\\HYPE\\Downloads\\Udeler")
+        
+        user_input = input("   Path (or press Enter for default): ").strip().strip('"')
+        
+        if user_input:
+            args.input = user_input
+        elif args.youtube:
+            print("\n❌ Error: YouTube mode requires an input path")
+            return
+        
+        print()
+    
     # YouTube Mode
     if args.youtube:
         print("=" * 60)
@@ -653,19 +693,7 @@ Examples:
         print("   For Custom GPT Training")
         print("=" * 60)
         
-        # Interactive input if no argument provided
-        if args.input == DEFAULT_INPUT:
-            print("\n📂 Enter input folder path (folder containing video subtitle files):")
-            print("   Example: C:\\Users\\HYPE\\Downloads\\Claude Code")
-            user_input = input("   Path: ").strip().strip('"')
-            
-            if not user_input:
-                print("\n❌ Error: No input path provided")
-                return
-            
-            input_path = Path(user_input)
-        else:
-            input_path = Path(args.input)
+        input_path = Path(args.input)
         
         print(f"\n📁 Input:  {input_path}")
         
