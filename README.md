@@ -53,6 +53,29 @@ cd srt-to-markdown
 
 ## 🚀 Usage
 
+### Interactive Mode (Easiest!)
+
+Simply run the executable without any arguments:
+
+```bash
+# Double-click srt-to-markdown.exe or run:
+python srt_to_markdown.py
+```
+
+You'll see a friendly menu:
+```
+============================================================
+🎬 SRT to Markdown Converter v3.0
+============================================================
+
+Select Mode:
+  1. Course Mode (Udemy, Coursera, LinkedIn Learning)
+  2. YouTube Mode (Video Collections for Custom GPT)
+  3. Exit
+
+Enter choice (1-3):
+```
+
 ### Course Mode
 
 ```bash
@@ -72,7 +95,10 @@ python srt_to_markdown.py -c "SQL Bootcamp"
 ### YouTube Mode
 
 ```bash
-# Process YouTube video collection
+# Interactive (prompts for folder)
+python srt_to_markdown.py --youtube
+
+# Direct path
 python srt_to_markdown.py --youtube -i "D:/YouTube/Claude Code"
 
 # Output will be saved in the same folder as input
