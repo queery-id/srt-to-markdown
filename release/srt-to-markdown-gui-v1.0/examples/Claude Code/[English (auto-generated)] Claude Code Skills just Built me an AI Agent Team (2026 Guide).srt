@@ -1,0 +1,2535 @@
+1
+00:00:00,080 --> 00:00:01,600
+You probably already know that Claude
+
+2
+00:00:01,600 --> 00:00:04,319
+Code is by far the best coding agent in
+
+3
+00:00:04,319 --> 00:00:06,640
+the world. It can create entire apps
+
+4
+00:00:06,640 --> 00:00:08,880
+from a simple prompt both front end and
+
+5
+00:00:08,880 --> 00:00:11,120
+backend. It can blow your mind in terms
+
+6
+00:00:11,120 --> 00:00:13,679
+of the design of that app. But what you
+
+7
+00:00:13,679 --> 00:00:15,519
+might not know is you can actually use
+
+8
+00:00:15,519 --> 00:00:18,160
+Claude Code as a general agent. And
+
+9
+00:00:18,160 --> 00:00:20,160
+Anthropic released something really
+
+10
+00:00:20,160 --> 00:00:21,920
+interesting a few weeks ago. they
+
+11
+00:00:21,920 --> 00:00:25,119
+released what is called Claude skills
+
+12
+00:00:25,119 --> 00:00:27,359
+which is just a special type of markdown
+
+13
+00:00:27,359 --> 00:00:31,119
+file which allows you to surround claude
+
+14
+00:00:31,119 --> 00:00:34,640
+code with relevant skills. So if you
+
+15
+00:00:34,640 --> 00:00:36,800
+wished that you had an AI agent that had
+
+16
+00:00:36,800 --> 00:00:38,879
+relevant skills, I believe that this is
+
+17
+00:00:38,879 --> 00:00:40,719
+probably the most important thing that
+
+18
+00:00:40,719 --> 00:00:43,520
+you could be studying right now. And so
+
+19
+00:00:43,520 --> 00:00:44,879
+in this video, we're going to talk about
+
+20
+00:00:44,879 --> 00:00:47,039
+how to set up Claude skills. We're also
+
+21
+00:00:47,039 --> 00:00:48,399
+going to talk about how to use Claude
+
+22
+00:00:48,399 --> 00:00:50,800
+code as a general agent. And we're going
+
+23
+00:00:50,800 --> 00:00:52,559
+to talk about how you need to set up
+
+24
+00:00:52,559 --> 00:00:55,840
+your skill.md file and what folders. And
+
+25
+00:00:55,840 --> 00:00:58,000
+I'm going to show you how to just use AI
+
+26
+00:00:58,000 --> 00:01:00,399
+to create these skills. Let's talk about
+
+27
+00:01:00,399 --> 00:01:02,399
+building a general agent with relevant
+
+28
+00:01:02,399 --> 00:01:03,920
+skills for your business. Whether you're
+
+29
+00:01:03,920 --> 00:01:05,680
+a content creator, business owner,
+
+30
+00:01:05,680 --> 00:01:07,439
+aspiring entrepreneur, we're going to
+
+31
+00:01:07,439 --> 00:01:10,240
+build an agent with relevant skills to
+
+32
+00:01:10,240 --> 00:01:11,920
+you and we're going to use that agent.
+
+33
+00:01:11,920 --> 00:01:14,159
+Let's dive in. Okay. So, we're going to
+
+34
+00:01:14,159 --> 00:01:15,920
+start off by talking about what is a
+
+35
+00:01:15,920 --> 00:01:17,840
+coding agent. You may have heard of
+
+36
+00:01:17,840 --> 00:01:19,280
+lovable and this video is not about
+
+37
+00:01:19,280 --> 00:01:20,400
+lovable. We're not even going to use
+
+38
+00:01:20,400 --> 00:01:22,080
+lovable. I just wanted to make a point
+
+39
+00:01:22,080 --> 00:01:24,240
+real quick. So many people are talking
+
+40
+00:01:24,240 --> 00:01:25,759
+about vibe coding. You can use tools
+
+41
+00:01:25,759 --> 00:01:28,640
+like lovable, replet, vibe code. These
+
+42
+00:01:28,640 --> 00:01:30,720
+are coding agents that you can use to
+
+43
+00:01:30,720 --> 00:01:34,079
+build apps. And whenever I go to lovable
+
+44
+00:01:34,079 --> 00:01:37,680
+and type in uh make a landing
+
+45
+00:01:37,680 --> 00:01:41,200
+landing page about pizza
+
+46
+00:01:41,200 --> 00:01:43,600
+right now, what it's doing is it's
+
+47
+00:01:43,600 --> 00:01:46,399
+spinning up a sandbox which is basically
+
+48
+00:01:46,399 --> 00:01:49,520
+a virtual computer and it's going to run
+
+49
+00:01:49,520 --> 00:01:52,720
+an AI agent or an AI coding agent on the
+
+50
+00:01:52,720 --> 00:01:54,560
+side. Now, it's going to generate a
+
+51
+00:01:54,560 --> 00:01:57,920
+bunch of files within a directory or
+
+52
+00:01:57,920 --> 00:02:01,439
+codebase, and those files are going to
+
+53
+00:02:01,439 --> 00:02:04,159
+make an app. And so, this is an AI
+
+54
+00:02:04,159 --> 00:02:07,360
+coding agent at work building an app.
+
+55
+00:02:07,360 --> 00:02:09,920
+Okay, so it's done. The lovable coding
+
+56
+00:02:09,920 --> 00:02:12,160
+agent took my prompt, make a landing
+
+57
+00:02:12,160 --> 00:02:14,640
+page about pizza. It generated all of
+
+58
+00:02:14,640 --> 00:02:16,560
+the files. This coding agent decided
+
+59
+00:02:16,560 --> 00:02:18,800
+what files it needed to generate. it
+
+60
+00:02:18,800 --> 00:02:21,040
+generated them and then it probably
+
+61
+00:02:21,040 --> 00:02:24,400
+reviewed those files and then it ran the
+
+62
+00:02:24,400 --> 00:02:26,400
+program in a virtual computer somewhere
+
+63
+00:02:26,400 --> 00:02:30,000
+so I can see it on my uh browser because
+
+64
+00:02:30,000 --> 00:02:32,239
+this is within a web browser and so this
+
+65
+00:02:32,239 --> 00:02:34,800
+is an example of an agent made
+
+66
+00:02:34,800 --> 00:02:36,720
+specifically for creating simple
+
+67
+00:02:36,720 --> 00:02:39,440
+applications a very narrow agent
+
+68
+00:02:39,440 --> 00:02:41,599
+experience where it's made specifically
+
+69
+00:02:41,599 --> 00:02:44,560
+for creating certain types of apps with
+
+70
+00:02:44,560 --> 00:02:46,879
+certain stacks and we could do this same
+
+71
+00:02:46,879 --> 00:02:49,200
+thing on our computer, right? We could
+
+72
+00:02:49,200 --> 00:02:51,200
+do the same thing on our computer. If we
+
+73
+00:02:51,200 --> 00:02:54,080
+were to go to Finder, we can just go
+
+74
+00:02:54,080 --> 00:02:56,000
+straight into our downloads, right? We
+
+75
+00:02:56,000 --> 00:02:57,599
+can go straight into our downloads and
+
+76
+00:02:57,599 --> 00:03:00,319
+we could go new folder. We can go like
+
+77
+00:03:00,319 --> 00:03:04,800
+this. We can say using quad code, right?
+
+78
+00:03:04,800 --> 00:03:07,760
+So, we don't even need any IDE or
+
+79
+00:03:07,760 --> 00:03:10,080
+something like cursor or lovable. I can
+
+80
+00:03:10,080 --> 00:03:13,840
+open a terminal window. I can open a new
+
+81
+00:03:13,840 --> 00:03:16,720
+terminal at this folder and we can just
+
+82
+00:03:16,720 --> 00:03:19,360
+run claude. So now we're running claude
+
+83
+00:03:19,360 --> 00:03:22,560
+code in this empty folder called using
+
+84
+00:03:22,560 --> 00:03:25,040
+claude code which is an empty folder and
+
+85
+00:03:25,040 --> 00:03:27,840
+I can just say please build a beautiful
+
+86
+00:03:27,840 --> 00:03:31,280
+amazing landing page for my pizza shop
+
+87
+00:03:31,280 --> 00:03:34,080
+Riley's Pizza Shop. Make it in the style
+
+88
+00:03:34,080 --> 00:03:37,840
+of neo brutalism mixed with a friendly
+
+89
+00:03:37,840 --> 00:03:41,120
+pizza energy. So just like lovable, we
+
+90
+00:03:41,120 --> 00:03:43,840
+can run this and claude code in this
+
+91
+00:03:43,840 --> 00:03:46,080
+empty folder is going to create the
+
+92
+00:03:46,080 --> 00:03:48,640
+application right here. Okay, check this
+
+93
+00:03:48,640 --> 00:03:51,519
+out. It just generated an index.html
+
+94
+00:03:51,519 --> 00:03:55,599
+file. And there we go. It created a file
+
+95
+00:03:55,599 --> 00:03:58,080
+the same way that Lovable is creating
+
+96
+00:03:58,080 --> 00:03:59,840
+all the different files and putting them
+
+97
+00:03:59,840 --> 00:04:02,159
+in a folder in some virtual machine.
+
+98
+00:04:02,159 --> 00:04:04,159
+It's just a virtual computer. We're
+
+99
+00:04:04,159 --> 00:04:06,239
+doing this on our computer. It's doing
+
+100
+00:04:06,239 --> 00:04:08,720
+the same exact thing Lovable is doing.
+
+101
+00:04:08,720 --> 00:04:10,879
+And the point I want to make here, you
+
+102
+00:04:10,879 --> 00:04:13,680
+can just use these coding models on your
+
+103
+00:04:13,680 --> 00:04:16,880
+computer and coding files, right? This
+
+104
+00:04:16,880 --> 00:04:19,759
+is an HTML file and this is a CSS file.
+
+105
+00:04:19,759 --> 00:04:22,800
+This is not the only type of file you
+
+106
+00:04:22,800 --> 00:04:24,320
+can create with cloud code. You can
+
+107
+00:04:24,320 --> 00:04:27,440
+create any type of file. So it is done.
+
+108
+00:04:27,440 --> 00:04:29,600
+And if we just copy this link right here
+
+109
+00:04:29,600 --> 00:04:32,720
+and we paste in localhost80,
+
+110
+00:04:32,720 --> 00:04:35,280
+we can run this on our computer. This is
+
+111
+00:04:35,280 --> 00:04:37,520
+running locally on our computer. where
+
+112
+00:04:37,520 --> 00:04:39,600
+Lovable in Lovable's case, it just
+
+113
+00:04:39,600 --> 00:04:41,840
+created a virtual machine and it ran it
+
+114
+00:04:41,840 --> 00:04:44,960
+on that computer and it showed you what
+
+115
+00:04:44,960 --> 00:04:47,680
+it created on the browser. Now, we're
+
+116
+00:04:47,680 --> 00:04:49,919
+running this fully on our computer and
+
+117
+00:04:49,919 --> 00:04:52,960
+we didn't use any like software in
+
+118
+00:04:52,960 --> 00:04:54,560
+between. We generated the code files
+
+119
+00:04:54,560 --> 00:04:57,520
+with an AI coding agent on our computer.
+
+120
+00:04:57,520 --> 00:05:00,240
+It used an AI model from anthropic
+
+121
+00:05:00,240 --> 00:05:02,800
+servers to create those files. So that's
+
+122
+00:05:02,800 --> 00:05:04,960
+where it costs money, but we didn't use
+
+123
+00:05:04,960 --> 00:05:07,440
+any other software other than getting
+
+124
+00:05:07,440 --> 00:05:09,440
+Claude to generate all the files. And
+
+125
+00:05:09,440 --> 00:05:12,000
+we're running it on our MacBook Pro. And
+
+126
+00:05:12,000 --> 00:05:14,560
+this is the website that it created. And
+
+127
+00:05:14,560 --> 00:05:17,840
+you'll notice that in my opinion, I've
+
+128
+00:05:17,840 --> 00:05:19,840
+tested every single one of these coding
+
+129
+00:05:19,840 --> 00:05:23,199
+agents. Just raw Claude code is the best
+
+130
+00:05:23,199 --> 00:05:25,280
+in the world. So Replet and lovable,
+
+131
+00:05:25,280 --> 00:05:26,720
+they have their own coding agents.
+
+132
+00:05:26,720 --> 00:05:28,960
+Claude Code out of the box is better
+
+133
+00:05:28,960 --> 00:05:31,039
+than all of them. And so what I want to
+
+134
+00:05:31,039 --> 00:05:35,280
+explain now is how you can use this as a
+
+135
+00:05:35,280 --> 00:05:38,720
+general agent. So this right here is
+
+136
+00:05:38,720 --> 00:05:41,440
+Obsidian. And this is just a basic notes
+
+137
+00:05:41,440 --> 00:05:44,160
+app where every file instead of the
+
+138
+00:05:44,160 --> 00:05:47,680
+files uh being an HTML file or a
+
+139
+00:05:47,680 --> 00:05:50,240
+JavaScript file or a CSS file which
+
+140
+00:05:50,240 --> 00:05:52,560
+ultimately created this uh application
+
+141
+00:05:52,560 --> 00:05:56,000
+that we can use. Instead of it being one
+
+142
+00:05:56,000 --> 00:05:57,520
+of those types of files, these are all
+
+143
+00:05:57,520 --> 00:05:59,840
+markdown files. So the way that I use
+
+144
+00:05:59,840 --> 00:06:02,720
+general agents is I actually use claude
+
+145
+00:06:02,720 --> 00:06:07,919
+code at the same location as my notes
+
+146
+00:06:07,919 --> 00:06:10,319
+like this is my agent workspace. This is
+
+147
+00:06:10,319 --> 00:06:11,680
+kind of how I think about this. This is
+
+148
+00:06:11,680 --> 00:06:14,639
+a notebook and Riley Brown uses this as
+
+149
+00:06:14,639 --> 00:06:16,479
+his personal notebook so that he can be
+
+150
+00:06:16,479 --> 00:06:18,560
+a better CMO and co-founder of the Vibe
+
+151
+00:06:18,560 --> 00:06:20,960
+Code app. And I basically state all of
+
+152
+00:06:20,960 --> 00:06:23,440
+my goals. Why am I stating this? I I
+
+153
+00:06:23,440 --> 00:06:25,360
+know my goals. Why am I writing this?
+
+154
+00:06:25,360 --> 00:06:28,319
+because I don't use this by myself. I
+
+155
+00:06:28,319 --> 00:06:30,319
+use this with my general agent which is
+
+156
+00:06:30,319 --> 00:06:32,800
+Claude Code. And what I can do here is I
+
+157
+00:06:32,800 --> 00:06:35,280
+can actually click on this or I can
+
+158
+00:06:35,280 --> 00:06:37,600
+rightclick on this and hit reveal in
+
+159
+00:06:37,600 --> 00:06:40,479
+Finder. So here we can see Riley content
+
+160
+00:06:40,479 --> 00:06:42,479
+creation. That's basically what I called
+
+161
+00:06:42,479 --> 00:06:45,520
+this file. And you'll see here all of
+
+162
+00:06:45,520 --> 00:06:49,600
+these different files here. Um like this
+
+163
+00:06:49,600 --> 00:06:51,919
+is just a wrapper of these files that
+
+164
+00:06:51,919 --> 00:06:53,520
+are showing up on my computer, right?
+
+165
+00:06:53,520 --> 00:06:56,319
+This is just in my computer. And so the
+
+166
+00:06:56,319 --> 00:06:59,520
+same way that I ran claude code in a new
+
+167
+00:06:59,520 --> 00:07:02,000
+folder, I can run claude code in this
+
+168
+00:07:02,000 --> 00:07:04,400
+folder. So I can reveal this in finder.
+
+169
+00:07:04,400 --> 00:07:05,520
+What I'm going to do is I'm going to
+
+170
+00:07:05,520 --> 00:07:09,599
+rightclick services, new terminal at
+
+171
+00:07:09,599 --> 00:07:12,240
+folder, right? New terminal at folder.
+
+172
+00:07:12,240 --> 00:07:14,800
+Now you can see here that it is running.
+
+173
+00:07:14,800 --> 00:07:16,560
+So we're in this folder right here,
+
+174
+00:07:16,560 --> 00:07:17,919
+which is the same folder where all of
+
+175
+00:07:17,919 --> 00:07:20,240
+this is located. And now we can run uh
+
+176
+00:07:20,240 --> 00:07:23,520
+claude. And so now we have cloud code
+
+177
+00:07:23,520 --> 00:07:28,000
+running in the folder that has all of my
+
+178
+00:07:28,000 --> 00:07:29,919
+notes. And so I can use it with cloud
+
+179
+00:07:29,919 --> 00:07:32,560
+code. So I could go into tasks, right?
+
+180
+00:07:32,560 --> 00:07:34,160
+And and this is how I keep track of my
+
+181
+00:07:34,160 --> 00:07:36,720
+tasks. I could go into Q. Um let's say
+
+182
+00:07:36,720 --> 00:07:38,639
+these are both done, right? This is
+
+183
+00:07:38,639 --> 00:07:40,400
+these are the things that I want to do.
+
+184
+00:07:40,400 --> 00:07:42,800
+Um and so in my queue, one thing that I
+
+185
+00:07:42,800 --> 00:07:44,639
+do want to do, and I can just drag this
+
+186
+00:07:44,639 --> 00:07:46,800
+in here. One thing that I do want to do
+
+187
+00:07:46,800 --> 00:07:51,599
+is I want to explain Claude skills to my
+
+188
+00:07:51,599 --> 00:07:54,879
+audience and make a video. Right? This
+
+189
+00:07:54,879 --> 00:07:56,319
+is one thing I really want to do. Um I
+
+190
+00:07:56,319 --> 00:07:59,199
+want to um share the file structure um
+
+191
+00:07:59,199 --> 00:08:01,520
+with of Claude skills. And then I want
+
+192
+00:08:01,520 --> 00:08:04,400
+to take my notebook and examine what
+
+193
+00:08:04,400 --> 00:08:07,039
+Claude skills would be useful for me to
+
+194
+00:08:07,039 --> 00:08:09,520
+create. And I'm I'm uh do this on this
+
+195
+00:08:09,520 --> 00:08:12,400
+page. Don't create or edit any other
+
+196
+00:08:12,400 --> 00:08:14,720
+files. Just make a plan and do it. Okay.
+
+197
+00:08:14,720 --> 00:08:16,400
+So, we just created this markdown file
+
+198
+00:08:16,400 --> 00:08:18,319
+of this thing that I want to do. The
+
+199
+00:08:18,319 --> 00:08:19,919
+cool thing is I can just ask Claude Code
+
+200
+00:08:19,919 --> 00:08:22,720
+to do it. I can just say, "Do what's in
+
+201
+00:08:22,720 --> 00:08:24,800
+my queue." Right? That's all I need to
+
+202
+00:08:24,800 --> 00:08:26,639
+say. I can say, "Yo, do what's in my
+
+203
+00:08:26,639 --> 00:08:29,199
+queue." And because the first thing that
+
+204
+00:08:29,199 --> 00:08:30,800
+this agent's going to do is analyze the
+
+205
+00:08:30,800 --> 00:08:33,279
+readme file. It's going to see how it's
+
+206
+00:08:33,279 --> 00:08:34,640
+organized, right? It's going to know
+
+207
+00:08:34,640 --> 00:08:36,959
+that there's tasks. It's going to know
+
+208
+00:08:36,959 --> 00:08:39,120
+what the queue is, draft tasks. So, it's
+
+209
+00:08:39,120 --> 00:08:41,120
+just going to know to check the queue.
+
+210
+00:08:41,120 --> 00:08:42,719
+And because Claude Code is such a
+
+211
+00:08:42,719 --> 00:08:45,440
+powerful agent and it's really good at
+
+212
+00:08:45,440 --> 00:08:47,680
+looking through the code base, in this
+
+213
+00:08:47,680 --> 00:08:49,360
+case, which is just a bunch of my notes,
+
+214
+00:08:49,360 --> 00:08:51,200
+it's going to find the right location.
+
+215
+00:08:51,200 --> 00:08:53,040
+It's really smart. And it's going to
+
+216
+00:08:53,040 --> 00:08:54,560
+find this page, and it's just going to
+
+217
+00:08:54,560 --> 00:08:56,480
+do what I want it to do. And we'll just
+
+218
+00:08:56,480 --> 00:08:58,080
+wait for Cloud Code to do that. And
+
+219
+00:08:58,080 --> 00:09:00,640
+you'll see here that we never said to
+
+220
+00:09:00,640 --> 00:09:02,480
+look at this file. It doesn't know that
+
+221
+00:09:02,480 --> 00:09:04,640
+I have this file open. It just found
+
+222
+00:09:04,640 --> 00:09:06,320
+what's in my queue. And you can see here
+
+223
+00:09:06,320 --> 00:09:09,120
+it's examining notebook for skill ideas.
+
+224
+00:09:09,120 --> 00:09:10,800
+It found the right file and now it's
+
+225
+00:09:10,800 --> 00:09:12,720
+creating the relevant things. Allow it
+
+226
+00:09:12,720 --> 00:09:15,200
+to edit this session. Boom. Look at
+
+227
+00:09:15,200 --> 00:09:19,440
+that. So, it just added all of this. It
+
+228
+00:09:19,440 --> 00:09:22,480
+added all of this
+
+229
+00:09:22,480 --> 00:09:25,920
+to this document. It told us what skills
+
+230
+00:09:25,920 --> 00:09:29,040
+are, right? And it told us that uh from
+
+231
+00:09:29,040 --> 00:09:31,760
+the anthropic skills repo, it it
+
+232
+00:09:31,760 --> 00:09:34,720
+basically did research. It found uh the
+
+233
+00:09:34,720 --> 00:09:37,920
+clawed skills repo. And now it is
+
+234
+00:09:37,920 --> 00:09:39,760
+telling us that you can create within
+
+235
+00:09:39,760 --> 00:09:43,120
+the claude.md file. You can create a
+
+236
+00:09:43,120 --> 00:09:45,120
+skill by creating a folder with the
+
+237
+00:09:45,120 --> 00:09:48,320
+skill name. And inside that folder, it
+
+238
+00:09:48,320 --> 00:09:51,600
+needs to have a claude or a skill.md
+
+239
+00:09:51,600 --> 00:09:54,480
+file. And then you can put optional uh
+
+240
+00:09:54,480 --> 00:09:56,880
+resources within that folder. And so you
+
+241
+00:09:56,880 --> 00:09:59,440
+can even put assets, references, etc.
+
+242
+00:09:59,440 --> 00:10:00,880
+And I'll get to that in just a second.
+
+243
+00:10:00,880 --> 00:10:03,200
+The point I wanted to make is the same
+
+244
+00:10:03,200 --> 00:10:06,720
+way lovable was a coding specific
+
+245
+00:10:06,720 --> 00:10:09,120
+example of using an agent. This is a
+
+246
+00:10:09,120 --> 00:10:11,760
+notes specific example for using an
+
+247
+00:10:11,760 --> 00:10:14,240
+agent. So I promise you we are we're
+
+248
+00:10:14,240 --> 00:10:16,720
+working our way up to creating claude
+
+249
+00:10:16,720 --> 00:10:18,160
+skills. I just wanted to illustrate the
+
+250
+00:10:18,160 --> 00:10:20,079
+point. I wanted to talk about what a
+
+251
+00:10:20,079 --> 00:10:21,760
+domain specific agent was like the
+
+252
+00:10:21,760 --> 00:10:23,839
+lovable agent that can create apps. Then
+
+253
+00:10:23,839 --> 00:10:25,920
+I showed you a note takingaking example
+
+254
+00:10:25,920 --> 00:10:27,760
+where you can use claude code as a
+
+255
+00:10:27,760 --> 00:10:29,360
+general agent. Now, we're going to use
+
+256
+00:10:29,360 --> 00:10:33,120
+it in a wide openen world within cursor.
+
+257
+00:10:33,120 --> 00:10:35,360
+And we can do literally whatever we
+
+258
+00:10:35,360 --> 00:10:38,240
+want. I like to use cursor because it's
+
+259
+00:10:38,240 --> 00:10:40,880
+just the best in my opinion for quickly
+
+260
+00:10:40,880 --> 00:10:42,800
+using claude code. And it's ironic
+
+261
+00:10:42,800 --> 00:10:45,839
+because I use we can just say claude
+
+262
+00:10:45,839 --> 00:10:50,160
+code skills. So, what uh we're going to
+
+263
+00:10:50,160 --> 00:10:52,079
+be creating claude skills in this
+
+264
+00:10:52,079 --> 00:10:55,040
+project. So, I'll just name it that. And
+
+265
+00:10:55,040 --> 00:10:58,800
+now it is opening up this directory in
+
+266
+00:10:58,800 --> 00:11:02,160
+an IDE. So cloud uh a cursor is just an
+
+267
+00:11:02,160 --> 00:11:05,279
+IDE like VS Code where you can view all
+
+268
+00:11:05,279 --> 00:11:07,519
+the files. And so the way that I vibe
+
+269
+00:11:07,519 --> 00:11:08,880
+code is I'm just going to come in here
+
+270
+00:11:08,880 --> 00:11:10,000
+and the first thing that I'm going to do
+
+271
+00:11:10,000 --> 00:11:11,680
+is hit command J. We're going to open up
+
+272
+00:11:11,680 --> 00:11:12,880
+the terminal and we're going to type
+
+273
+00:11:12,880 --> 00:11:15,120
+claude. Then we're going to press this
+
+274
+00:11:15,120 --> 00:11:18,240
+right here to open up the side panel.
+
+275
+00:11:18,240 --> 00:11:21,519
+And so now we have Claude code on the
+
+276
+00:11:21,519 --> 00:11:25,120
+left or on the right. controlling this
+
+277
+00:11:25,120 --> 00:11:28,079
+directory which is claude code skills
+
+278
+00:11:28,079 --> 00:11:30,079
+and what we're going to do here is I'm
+
+279
+00:11:30,079 --> 00:11:34,000
+going to say please take a look at this
+
+280
+00:11:34,000 --> 00:11:37,200
+direct or at this repo and I'm going to
+
+281
+00:11:37,200 --> 00:11:39,839
+paste this GitHub uh to the anthropic
+
+282
+00:11:39,839 --> 00:11:43,519
+skills right here please create one
+
+283
+00:11:43,519 --> 00:11:48,480
+simple skill in the right format so that
+
+284
+00:11:48,480 --> 00:11:53,600
+you will use this skill when you need
+
+285
+00:11:53,600 --> 00:11:55,760
+to. Okay. So, right now it's creating an
+
+286
+00:11:55,760 --> 00:11:58,000
+example skill. What it's going to do is
+
+287
+00:11:58,000 --> 00:12:01,360
+it's going to create a cloud file. It's
+
+288
+00:12:01,360 --> 00:12:04,000
+going to create a cloud file. As you can
+
+289
+00:12:04,000 --> 00:12:07,279
+see here, it's created this.cloud file.
+
+290
+00:12:07,279 --> 00:12:09,920
+It's also going to create a skills
+
+291
+00:12:09,920 --> 00:12:11,839
+folder as you'll see in just a second.
+
+292
+00:12:11,839 --> 00:12:15,360
+Okay, there you go. It created a folder
+
+293
+00:12:15,360 --> 00:12:17,040
+called.cloud
+
+294
+00:12:17,040 --> 00:12:19,680
+and then it created a skills folder
+
+295
+00:12:19,680 --> 00:12:22,240
+within that. And then it has other
+
+296
+00:12:22,240 --> 00:12:24,160
+folders beneath it. So it created this
+
+297
+00:12:24,160 --> 00:12:26,880
+summarized folder with a skill MD.
+
+298
+00:12:26,880 --> 00:12:28,720
+That's all you need to create a skill.
+
+299
+00:12:28,720 --> 00:12:30,000
+You just need to put in the docloud
+
+300
+00:12:30,000 --> 00:12:31,680
+folder because cloud code knows to look
+
+301
+00:12:31,680 --> 00:12:33,519
+in thecloud folder for certain things
+
+302
+00:12:33,519 --> 00:12:36,000
+like sub aents and now skills. We're not
+
+303
+00:12:36,000 --> 00:12:37,440
+talking about sub aents in this video.
+
+304
+00:12:37,440 --> 00:12:39,279
+We're just talking about skills. So we
+
+305
+00:12:39,279 --> 00:12:41,200
+created the skills folder. And within
+
+306
+00:12:41,200 --> 00:12:42,880
+this folder, right, we see this
+
+307
+00:12:42,880 --> 00:12:44,480
+skill.md.
+
+308
+00:12:44,480 --> 00:12:47,040
+And every single skill.mmd file should
+
+309
+00:12:47,040 --> 00:12:49,680
+be formatted with the name and
+
+310
+00:12:49,680 --> 00:12:52,639
+description. Right? It should have a
+
+311
+00:12:52,639 --> 00:12:54,959
+name and description. You can see here
+
+312
+00:12:54,959 --> 00:12:56,560
+that this one that I've created is
+
+313
+00:12:56,560 --> 00:12:59,040
+called brand voice, which is skill
+
+314
+00:12:59,040 --> 00:13:01,680
+number one. And then there is a name and
+
+315
+00:13:01,680 --> 00:13:03,600
+description. And so the name is just a
+
+316
+00:13:03,600 --> 00:13:04,959
+human-friendly title. It can be
+
+317
+00:13:04,959 --> 00:13:07,760
+anything. But the crucial part is this
+
+318
+00:13:07,760 --> 00:13:09,839
+description because it tells Claude code
+
+319
+00:13:09,839 --> 00:13:13,040
+when to use this skill. And so we're
+
+320
+00:13:13,040 --> 00:13:14,079
+reaching a point where you can get
+
+321
+00:13:14,079 --> 00:13:15,680
+agents to do things with a simple
+
+322
+00:13:15,680 --> 00:13:18,000
+markdown file. But what you need to do
+
+323
+00:13:18,000 --> 00:13:19,279
+is you need to make sure that you format
+
+324
+00:13:19,279 --> 00:13:22,000
+it correctly so Cloud Code knows when to
+
+325
+00:13:22,000 --> 00:13:24,000
+follow your instructions. Because
+
+326
+00:13:24,000 --> 00:13:27,760
+basically all skills are the way that I
+
+327
+00:13:27,760 --> 00:13:30,320
+think about them is they are just SOPs
+
+328
+00:13:30,320 --> 00:13:34,320
+or standard operating procedures. SOPs
+
+329
+00:13:34,320 --> 00:13:37,440
+for agents. And so right these are
+
+330
+00:13:37,440 --> 00:13:39,680
+instructions on what to do in certain
+
+331
+00:13:39,680 --> 00:13:42,480
+scenarios. And if you put a high quality
+
+332
+00:13:42,480 --> 00:13:45,360
+description, it'll know what instruction
+
+333
+00:13:45,360 --> 00:13:49,519
+manual or SOP to use when it needs to do
+
+334
+00:13:49,519 --> 00:13:52,000
+a specific task. And so I don't really
+
+335
+00:13:52,000 --> 00:13:54,880
+want to use this summarize skill. I
+
+336
+00:13:54,880 --> 00:13:56,320
+actually want to create a skill that's
+
+337
+00:13:56,320 --> 00:13:58,399
+much more relevant to me. Okay. So I
+
+338
+00:13:58,399 --> 00:13:59,600
+just want to show you what I've been
+
+339
+00:13:59,600 --> 00:14:02,320
+doing. I've been annotating. I've been
+
+340
+00:14:02,320 --> 00:14:04,880
+annotating my Twitter posts because I
+
+341
+00:14:04,880 --> 00:14:07,040
+can give these to Claude. I can put
+
+342
+00:14:07,040 --> 00:14:09,199
+these in Claude skills so that the agent
+
+343
+00:14:09,199 --> 00:14:12,800
+knows how I post. And so I can say short
+
+344
+00:14:12,800 --> 00:14:16,880
+video attached to this photo. This is a
+
+345
+00:14:16,880 --> 00:14:18,240
+Twitter account that I run by the way
+
+346
+00:14:18,240 --> 00:14:20,560
+that helps me grow Vibe Code. And I can
+
+347
+00:14:20,560 --> 00:14:26,240
+say um uh senior vibe coder
+
+348
+00:14:26,240 --> 00:14:28,720
+is ragebait
+
+349
+00:14:28,720 --> 00:14:32,880
+and works. I don't do this often, right?
+
+350
+00:14:32,880 --> 00:14:34,240
+Okay. And I just put this directly on
+
+351
+00:14:34,240 --> 00:14:36,000
+the image. And it helps me kind of
+
+352
+00:14:36,000 --> 00:14:39,519
+annotate my images here. And I'm just
+
+353
+00:14:39,519 --> 00:14:41,839
+going to hit I'm just going to exit out.
+
+354
+00:14:41,839 --> 00:14:44,240
+Hit save. And we can save all these. And
+
+355
+00:14:44,240 --> 00:14:45,519
+so what we can do here is we can just
+
+356
+00:14:45,519 --> 00:14:47,680
+take all of these files. We can drag
+
+357
+00:14:47,680 --> 00:14:49,199
+them in here. And what I'm going to do
+
+358
+00:14:49,199 --> 00:14:52,560
+is I'm just going to put a new skill
+
+359
+00:14:52,560 --> 00:14:55,120
+here. And what we can do is we can just
+
+360
+00:14:55,120 --> 00:14:57,440
+drag these images in here. Now we're
+
+361
+00:14:57,440 --> 00:15:00,000
+going to go to cloud code. I want you to
+
+362
+00:15:00,000 --> 00:15:03,760
+replace this uh summarize skill. And
+
+363
+00:15:03,760 --> 00:15:07,120
+because this is a folder, right? Uh I
+
+364
+00:15:07,120 --> 00:15:10,160
+can just type at summarize, right? I can
+
+365
+00:15:10,160 --> 00:15:13,360
+say replace this summarize skill. Uh
+
+366
+00:15:13,360 --> 00:15:16,560
+this skill, the whole summarize skill uh
+
+367
+00:15:16,560 --> 00:15:20,160
+should be replaced with a Twitter post X
+
+368
+00:15:20,160 --> 00:15:23,519
+post skill. This skill should allow the
+
+369
+00:15:23,519 --> 00:15:26,959
+agent to create tweets in my style and
+
+370
+00:15:26,959 --> 00:15:30,079
+use the images that are in the at new in
+
+371
+00:15:30,079 --> 00:15:32,399
+the new skill here folder as a
+
+372
+00:15:32,399 --> 00:15:37,040
+reference. So please create that skill
+
+373
+00:15:37,040 --> 00:15:39,199
+now. So we're basically going to tell
+
+374
+00:15:39,199 --> 00:15:41,600
+cloud code to analyze these images. It's
+
+375
+00:15:41,600 --> 00:15:43,440
+going to look for patterns in how I
+
+376
+00:15:43,440 --> 00:15:45,440
+speak. And actually one thing I can
+
+377
+00:15:45,440 --> 00:15:48,800
+mention, I just hit the backspace.
+
+378
+00:15:48,800 --> 00:15:53,759
+Just know the red text in these images
+
+379
+00:15:53,759 --> 00:15:56,000
+are annotations. So that's not part of
+
+380
+00:15:56,000 --> 00:15:57,759
+the post. These are my annotations to
+
+381
+00:15:57,759 --> 00:15:59,600
+you on why I did certain things. So take
+
+382
+00:15:59,600 --> 00:16:00,720
+that into consideration when
+
+383
+00:16:00,720 --> 00:16:02,880
+constructing this skill, right? So I
+
+384
+00:16:02,880 --> 00:16:05,279
+annotated why I did what I did. So this
+
+385
+00:16:05,279 --> 00:16:07,040
+gives some extra context to Cloud Code
+
+386
+00:16:07,040 --> 00:16:08,880
+and it's going to packages it package it
+
+387
+00:16:08,880 --> 00:16:10,959
+as a skill. And so in theory whenever I
+
+388
+00:16:10,959 --> 00:16:12,800
+ask for a Twitter post to claude code in
+
+389
+00:16:12,800 --> 00:16:15,519
+the future uh within this repo it should
+
+390
+00:16:15,519 --> 00:16:18,079
+be able to do it in my style because
+
+391
+00:16:18,079 --> 00:16:20,320
+I've given it relevant context. Okay. So
+
+392
+00:16:20,320 --> 00:16:23,519
+there you go. It created this skill.md
+
+393
+00:16:23,519 --> 00:16:26,000
+file and all it did was analyze all of
+
+394
+00:16:26,000 --> 00:16:29,120
+those images. It converted them into
+
+395
+00:16:29,120 --> 00:16:32,959
+these uh markdown formats and it
+
+396
+00:16:32,959 --> 00:16:35,279
+converted it into a skill. What it
+
+397
+00:16:35,279 --> 00:16:38,399
+didn't do is I didn't specify this. Uh
+
+398
+00:16:38,399 --> 00:16:40,079
+that was just a temporary folder. Please
+
+399
+00:16:40,079 --> 00:16:42,800
+remove that folder, but add those images
+
+400
+00:16:42,800 --> 00:16:45,839
+into that skill folder as references
+
+401
+00:16:45,839 --> 00:16:47,360
+because this doesn't need to be here.
+
+402
+00:16:47,360 --> 00:16:50,399
+This can just go into the skill and
+
+403
+00:16:50,399 --> 00:16:52,800
+right. So right now we have two skills.
+
+404
+00:16:52,800 --> 00:16:54,240
+We're going to add another skill in just
+
+405
+00:16:54,240 --> 00:16:56,959
+a second. So we have one skill and every
+
+406
+00:16:56,959 --> 00:16:59,440
+skill needs a claw.md file. So it just
+
+407
+00:16:59,440 --> 00:17:01,040
+created this and now it has these
+
+408
+00:17:01,040 --> 00:17:03,680
+references that it can use right here.
+
+409
+00:17:03,680 --> 00:17:07,199
+What we can do if we want references
+
+410
+00:17:07,199 --> 00:17:10,160
+uh to posts
+
+411
+00:17:10,160 --> 00:17:12,079
+and we can select all of these and we
+
+412
+00:17:12,079 --> 00:17:14,559
+can just like move them in here.
+
+413
+00:17:14,559 --> 00:17:17,120
+So we have references and then the
+
+414
+00:17:17,120 --> 00:17:19,760
+skill.md file. You need this skill.md
+
+415
+00:17:19,760 --> 00:17:22,640
+file, right? And so what we can do, I
+
+416
+00:17:22,640 --> 00:17:28,000
+want you to create a markdown file in
+
+417
+00:17:28,000 --> 00:17:32,000
+the root. And when I say in the root, I
+
+418
+00:17:32,000 --> 00:17:35,039
+mean right there's the the folder that
+
+419
+00:17:35,039 --> 00:17:37,440
+we opened up originally which is claude
+
+420
+00:17:37,440 --> 00:17:39,679
+code skills. This is the root folder. So
+
+421
+00:17:39,679 --> 00:17:42,480
+it should put it in below thecloud
+
+422
+00:17:42,480 --> 00:17:44,400
+folder. The dotcloud folder is also in
+
+423
+00:17:44,400 --> 00:17:46,480
+the root. The skills folder is in the
+
+424
+00:17:46,480 --> 00:17:48,799
+do.cloud folder. Thus not in the root.
+
+425
+00:17:48,799 --> 00:17:51,280
+Just wanted to be clear. uh in the root
+
+426
+00:17:51,280 --> 00:17:55,679
+and come up with 10
+
+427
+00:17:55,679 --> 00:18:01,840
+ideas for the Twitter copy based on my
+
+428
+00:18:01,840 --> 00:18:07,280
+last video where I explained Claude
+
+429
+00:18:07,280 --> 00:18:08,960
+skills
+
+430
+00:18:08,960 --> 00:18:11,600
+should match and then I can uh give it
+
+431
+00:18:11,600 --> 00:18:16,240
+that GitHub repo link I mentioned skills
+
+432
+00:18:16,240 --> 00:18:19,520
+and explained why it's important.
+
+433
+00:18:19,520 --> 00:18:25,120
+important for general use cases for like
+
+434
+00:18:25,120 --> 00:18:26,880
+marketing
+
+435
+00:18:26,880 --> 00:18:30,799
+and as general agent. Okay. So, let's
+
+436
+00:18:30,799 --> 00:18:32,320
+say I made this video because I'm making
+
+437
+00:18:32,320 --> 00:18:33,919
+this video right now. What I would
+
+438
+00:18:33,919 --> 00:18:35,679
+probably do is feed in the transcript of
+
+439
+00:18:35,679 --> 00:18:37,840
+this video and then it would generate 10
+
+440
+00:18:37,840 --> 00:18:39,760
+options. So, it would have more context
+
+441
+00:18:39,760 --> 00:18:41,120
+of the video we're creating. But since
+
+442
+00:18:41,120 --> 00:18:43,120
+I'm making the video right now, I can't
+
+443
+00:18:43,120 --> 00:18:45,280
+give it the transcript. Um, but that's
+
+444
+00:18:45,280 --> 00:18:47,679
+okay. It's going to create a markdown
+
+445
+00:18:47,679 --> 00:18:49,520
+file in the root and it's going to use
+
+446
+00:18:49,520 --> 00:18:52,400
+this skill. Okay, so it is done. Okay,
+
+447
+00:18:52,400 --> 00:18:55,200
+you'll see that when you see this green
+
+448
+00:18:55,200 --> 00:18:57,919
+dot and it shows expost right here. When
+
+449
+00:18:57,919 --> 00:18:59,520
+you see this green dot and it has
+
+450
+00:18:59,520 --> 00:19:02,720
+expost, that means it's using that
+
+451
+00:19:02,720 --> 00:19:06,559
+skill, right? It is using the expost
+
+452
+00:19:06,559 --> 00:19:08,160
+skill.
+
+453
+00:19:08,160 --> 00:19:09,679
+And we're going to allow it to create
+
+454
+00:19:09,679 --> 00:19:13,360
+these files. And boom, Twitter ideas.
+
+455
+00:19:13,360 --> 00:19:16,640
+So, here we go. Cloud Code just became a
+
+456
+00:19:16,640 --> 00:19:19,120
+general agent, not a chatbot, an agent
+
+457
+00:19:19,120 --> 00:19:22,320
+that does your workflows. Enthropic just
+
+458
+00:19:22,320 --> 00:19:24,640
+released skills, reusable prompt
+
+459
+00:19:24,640 --> 00:19:26,960
+templates, invoke with slash commands,
+
+460
+00:19:26,960 --> 00:19:28,720
+marketing teams. Okay, so this is really
+
+461
+00:19:28,720 --> 00:19:31,280
+good. Oh my, this shouldn't be possible.
+
+462
+00:19:31,280 --> 00:19:33,440
+I turned Claude into my personal
+
+463
+00:19:33,440 --> 00:19:36,320
+marketing team. Social media copy on
+
+464
+00:19:36,320 --> 00:19:38,320
+demand, email sequences in seconds,
+
+465
+00:19:38,320 --> 00:19:41,440
+brand voice locked in permanently. Zero
+
+466
+00:19:41,440 --> 00:19:44,480
+prompting every time. How Claude skills
+
+467
+00:19:44,480 --> 00:19:47,280
+one markdown file infinite workflows.
+
+468
+00:19:47,280 --> 00:19:51,280
+This is very good. So it wrote this in
+
+469
+00:19:51,280 --> 00:19:54,320
+my voice using this skill. But it gets
+
+470
+00:19:54,320 --> 00:19:57,760
+much cooler than this. So if we were to
+
+471
+00:19:57,760 --> 00:20:01,919
+go to um let's go to arc. So we're going
+
+472
+00:20:01,919 --> 00:20:05,600
+to go to typefully.com. And in typefully
+
+473
+00:20:05,600 --> 00:20:10,720
+we can go to settings and we could go to
+
+474
+00:20:10,720 --> 00:20:15,600
+API and we can hit new API key. And so
+
+475
+00:20:15,600 --> 00:20:18,960
+this is going to be test key
+
+476
+00:20:18,960 --> 00:20:22,799
+for me. Create API key. I'm going to
+
+477
+00:20:22,799 --> 00:20:25,440
+delete this right after this video. And
+
+478
+00:20:25,440 --> 00:20:26,720
+then what I'm going to do is I'm going
+
+479
+00:20:26,720 --> 00:20:29,039
+to click on this docs. And this explains
+
+480
+00:20:29,039 --> 00:20:31,760
+exactly how to use this API key. So,
+
+481
+00:20:31,760 --> 00:20:33,039
+what I'm trying to do here is I don't
+
+482
+00:20:33,039 --> 00:20:34,880
+want it to just come up with ideas. I
+
+483
+00:20:34,880 --> 00:20:37,200
+want them to draft them in this tool
+
+484
+00:20:37,200 --> 00:20:39,120
+where I can post directly to social
+
+485
+00:20:39,120 --> 00:20:41,039
+media. So, in theory, I could have an
+
+486
+00:20:41,039 --> 00:20:44,960
+agent uh come up with tweets uh and
+
+487
+00:20:44,960 --> 00:20:46,480
+automatically
+
+488
+00:20:46,480 --> 00:20:48,320
+draft them within Titefully because
+
+489
+00:20:48,320 --> 00:20:49,600
+that's what you can do here on this
+
+490
+00:20:49,600 --> 00:20:51,120
+platform, right? We could have it
+
+491
+00:20:51,120 --> 00:20:56,640
+directly post this as a um a draft here,
+
+492
+00:20:56,640 --> 00:20:58,799
+right? It can schedule a new draft. And
+
+493
+00:20:58,799 --> 00:20:59,919
+so, that's exactly what I'm going to
+
+494
+00:20:59,919 --> 00:21:05,679
+tell it. So I want you to add to our
+
+495
+00:21:05,679 --> 00:21:09,120
+x post skill. I'm using the software
+
+496
+00:21:09,120 --> 00:21:11,440
+typley and I want you to instead of
+
+497
+00:21:11,440 --> 00:21:12,960
+basically instead of putting these in a
+
+498
+00:21:12,960 --> 00:21:13,760
+document, I want you to actually
+
+499
+00:21:13,760 --> 00:21:15,280
+directly schedule these as a draft on
+
+500
+00:21:15,280 --> 00:21:17,120
+tightfully. And so I am going to give it
+
+501
+00:21:17,120 --> 00:21:19,280
+these docs to the API. Here are the docs
+
+502
+00:21:19,280 --> 00:21:22,559
+to read. Here is my API key. It is in a
+
+503
+00:21:22,559 --> 00:21:24,720
+text file, right? So I don't want to
+
+504
+00:21:24,720 --> 00:21:26,080
+expose it. What I'm going to do is I'm
+
+505
+00:21:26,080 --> 00:21:28,960
+just going to go I'm going to go key.txt
+
+506
+00:21:28,960 --> 00:21:31,280
+txt. I'm going to paste my key right
+
+507
+00:21:31,280 --> 00:21:33,600
+here. So, I pasted my key in this file
+
+508
+00:21:33,600 --> 00:21:37,039
+and I can just go at key.txt.
+
+509
+00:21:37,039 --> 00:21:41,520
+It is here. Please add to the skill
+
+510
+00:21:41,520 --> 00:21:44,159
+using claude skills. And I'm going to
+
+511
+00:21:44,159 --> 00:21:46,559
+mention this link right here. Please
+
+512
+00:21:46,559 --> 00:21:51,360
+make this skill such that it schedules
+
+513
+00:21:51,360 --> 00:21:57,280
+it as a draft to this typefully account.
+
+514
+00:21:57,280 --> 00:22:01,919
+It should not post or schedule. Okay,
+
+515
+00:22:01,919 --> 00:22:04,480
+now we're going to wait for the skill
+
+516
+00:22:04,480 --> 00:22:08,480
+called expost to be uh messed with.
+
+517
+00:22:08,480 --> 00:22:11,760
+Okay, so it is done. And here we can see
+
+518
+00:22:11,760 --> 00:22:15,039
+that your accounts available is Riley
+
+519
+00:22:15,039 --> 00:22:17,520
+Brown vibe code vibe coding explained.
+
+520
+00:22:17,520 --> 00:22:21,200
+Okay, so this works. Maybe maybe uh
+
+521
+00:22:21,200 --> 00:22:26,799
+please test this by um drafting
+
+522
+00:22:26,799 --> 00:22:31,760
+one of the items in the list
+
+523
+00:22:31,760 --> 00:22:35,200
+that we generated in and then we can
+
+524
+00:22:35,200 --> 00:22:38,400
+just go claude skills Twitter ideas.
+
+525
+00:22:38,400 --> 00:22:41,600
+Okay. Okay. It looks like it is done. If
+
+526
+00:22:41,600 --> 00:22:44,240
+we come back here. Okay. It created
+
+527
+00:22:44,240 --> 00:22:46,480
+this, right? It created this on vibe
+
+528
+00:22:46,480 --> 00:22:50,640
+coding explained. Okay. Now on the Riley
+
+529
+00:22:50,640 --> 00:22:56,880
+Brown account, draft a post that says,
+
+530
+00:22:56,880 --> 00:23:00,000
+"Hi, this is a test." Okay, so it's
+
+531
+00:23:00,000 --> 00:23:03,760
+done. If we go back to Arc, we go to
+
+532
+00:23:03,760 --> 00:23:05,360
+Riley.
+
+533
+00:23:05,360 --> 00:23:07,840
+Here we go. We see, "Hi, this is a test.
+
+534
+00:23:07,840 --> 00:23:10,559
+This was 34 seconds ago." So that's
+
+535
+00:23:10,559 --> 00:23:14,720
+pretty cool. We can have it draft posts.
+
+536
+00:23:14,720 --> 00:23:16,480
+I'm going to just reset the context
+
+537
+00:23:16,480 --> 00:23:19,200
+here. Um, so we're opening up a new
+
+538
+00:23:19,200 --> 00:23:22,480
+cloud instance to reset it, right? We're
+
+539
+00:23:22,480 --> 00:23:24,720
+resetting it uh so that there's no
+
+540
+00:23:24,720 --> 00:23:27,120
+context in here. And I'm going to say, I
+
+541
+00:23:27,120 --> 00:23:30,559
+just created a tightfully
+
+542
+00:23:30,559 --> 00:23:34,159
+video that explains how I created a
+
+543
+00:23:34,159 --> 00:23:38,400
+Claude code skill in order to uh post on
+
+544
+00:23:38,400 --> 00:23:41,120
+all my Twitter accounts via Typefully. I
+
+545
+00:23:41,120 --> 00:23:44,960
+want you to draft up three exposts and
+
+546
+00:23:44,960 --> 00:23:46,880
+draft them on Typefully on the Vibe
+
+547
+00:23:46,880 --> 00:23:48,559
+Coding Explained account. Oops, I
+
+548
+00:23:48,559 --> 00:23:52,000
+misspelled it. Typefully
+
+549
+00:23:52,000 --> 00:23:55,280
+is the app.
+
+550
+00:23:55,280 --> 00:23:57,039
+Okay, so we interrupted it, but it was
+
+551
+00:23:57,039 --> 00:23:58,960
+using the Expost skill. It should go
+
+552
+00:23:58,960 --> 00:24:02,240
+back to using the Expost skill. Okay, do
+
+553
+00:24:02,240 --> 00:24:06,000
+I want to proceed? Yes. Okay, so the
+
+554
+00:24:06,000 --> 00:24:09,679
+drafts were created. Oo, it has a link
+
+555
+00:24:09,679 --> 00:24:11,600
+associated with it. Wait, what happens
+
+556
+00:24:11,600 --> 00:24:15,440
+if we just go to this link? Wow,
+
+557
+00:24:15,440 --> 00:24:17,840
+skills repo. It even included that repo.
+
+558
+00:24:17,840 --> 00:24:19,679
+No way. You can build custom skills for
+
+559
+00:24:19,679 --> 00:24:21,679
+cloud code, automate repetitive
+
+560
+00:24:21,679 --> 00:24:23,600
+workflows, create one-click commands,
+
+561
+00:24:23,600 --> 00:24:25,360
+share skills across projects. Zero
+
+562
+00:24:25,360 --> 00:24:28,240
+coding required. Just dropped a full
+
+563
+00:24:28,240 --> 00:24:30,480
+walkth through how to do this. Wow.
+
+564
+00:24:30,480 --> 00:24:33,840
+Okay, so it created these posts using
+
+565
+00:24:33,840 --> 00:24:38,320
+the typefully or the expost skill and in
+
+566
+00:24:38,320 --> 00:24:42,000
+this skill.md file, it has access to
+
+567
+00:24:42,000 --> 00:24:44,400
+this code, right? You can it has this
+
+568
+00:24:44,400 --> 00:24:46,880
+code that I can that the claude code can
+
+569
+00:24:46,880 --> 00:24:51,039
+use to post this on social media. And
+
+570
+00:24:51,039 --> 00:24:52,559
+what I need to do now is I need to
+
+571
+00:24:52,559 --> 00:24:54,400
+delete my API key because I probably
+
+572
+00:24:54,400 --> 00:24:56,400
+exposed it. All right, so there you go.
+
+573
+00:24:56,400 --> 00:24:59,200
+We just created a general agent and we
+
+574
+00:24:59,200 --> 00:25:01,919
+gave it a skill. And you know what? I
+
+575
+00:25:01,919 --> 00:25:03,760
+think that's enough for you to get
+
+576
+00:25:03,760 --> 00:25:05,600
+started. I don't want to like go crazy
+
+577
+00:25:05,600 --> 00:25:08,480
+and create like an agent swarm or an
+
+578
+00:25:08,480 --> 00:25:10,400
+agent with a ton of different skills,
+
+579
+00:25:10,400 --> 00:25:13,360
+but we just created a we used claude
+
+580
+00:25:13,360 --> 00:25:15,279
+within cursor to create an agent. And
+
+581
+00:25:15,279 --> 00:25:17,760
+then we just created one simple skill.
+
+582
+00:25:17,760 --> 00:25:19,279
+And this is enough for you to get
+
+583
+00:25:19,279 --> 00:25:21,440
+started because as you saw, I just gave
+
+584
+00:25:21,440 --> 00:25:23,360
+it the link which I'll put in the
+
+585
+00:25:23,360 --> 00:25:25,120
+description to the Claude code skills.
+
+586
+00:25:25,120 --> 00:25:27,039
+So claude code can make your skills for
+
+587
+00:25:27,039 --> 00:25:30,080
+you and remember you just create you
+
+588
+00:25:30,080 --> 00:25:32,240
+know you have the root folder right and
+
+589
+00:25:32,240 --> 00:25:34,480
+then within your project you just have
+
+590
+00:25:34,480 --> 00:25:38,000
+aclad pro uh folder then you have
+
+591
+00:25:38,000 --> 00:25:41,279
+another folder uh which is your skills
+
+592
+00:25:41,279 --> 00:25:44,320
+folder and then within that you just
+
+593
+00:25:44,320 --> 00:25:46,559
+have the skill name. So this is just
+
+594
+00:25:46,559 --> 00:25:51,200
+skill uh skill-1 folder and then in here
+
+595
+00:25:51,200 --> 00:25:55,520
+you have a uh a skill
+
+596
+00:25:55,520 --> 00:25:58,640
+md file and within that file it will
+
+597
+00:25:58,640 --> 00:26:02,320
+have a name and description and cloud
+
+598
+00:26:02,320 --> 00:26:03,760
+code will do that for you. Just make
+
+599
+00:26:03,760 --> 00:26:05,919
+sure that when you create these skills
+
+600
+00:26:05,919 --> 00:26:07,120
+right because you can create many of
+
+601
+00:26:07,120 --> 00:26:09,360
+these. You can create skill one which we
+
+602
+00:26:09,360 --> 00:26:11,919
+did um and we didn't create more than
+
+603
+00:26:11,919 --> 00:26:13,919
+one skill right you can create as many
+
+604
+00:26:13,919 --> 00:26:15,679
+skills as you want. I wouldn't go
+
+605
+00:26:15,679 --> 00:26:18,080
+overboard, but if you want to create a
+
+606
+00:26:18,080 --> 00:26:19,760
+general purpose agent and use Cloud
+
+607
+00:26:19,760 --> 00:26:21,760
+Code, this is how you can do it. And you
+
+608
+00:26:21,760 --> 00:26:24,159
+can create a bunch of different skills.
+
+609
+00:26:24,159 --> 00:26:25,919
+And so, in the description down below
+
+610
+00:26:25,919 --> 00:26:27,919
+this video, you'll find a link to a
+
+611
+00:26:27,919 --> 00:26:29,919
+webinar. I'm just going to do like a big
+
+612
+00:26:29,919 --> 00:26:32,080
+live stream where we're going to create
+
+613
+00:26:32,080 --> 00:26:35,520
+a really cool uh agent interface with a
+
+614
+00:26:35,520 --> 00:26:36,799
+ton of different skills. We're going to
+
+615
+00:26:36,799 --> 00:26:38,640
+do it live. It's going to be like 3 to
+
+616
+00:26:38,640 --> 00:26:40,559
+four hours long. And so, if you want to
+
+617
+00:26:40,559 --> 00:26:42,000
+sign up for that, that's in the
+
+618
+00:26:42,000 --> 00:26:44,159
+description. It's going to be sick. But
+
+619
+00:26:44,159 --> 00:26:46,720
+uh yeah, this is just part two of my
+
+620
+00:26:46,720 --> 00:26:49,039
+general agent series. I made part one on
+
+621
+00:26:49,039 --> 00:26:50,799
+Obsidian and I'm just going to continue
+
+622
+00:26:50,799 --> 00:26:52,640
+this because I'm becoming much more
+
+623
+00:26:52,640 --> 00:26:56,000
+interested in creating agents with
+
+624
+00:26:56,000 --> 00:26:58,480
+skills. And in the future, we're going
+
+625
+00:26:58,480 --> 00:27:02,720
+to mix agent skills with also apps.
+
+626
+00:27:02,720 --> 00:27:04,000
+We're going to create a little interface
+
+627
+00:27:04,000 --> 00:27:05,679
+where we can alternate between using an
+
+628
+00:27:05,679 --> 00:27:08,320
+app that we create and the agent and we
+
+629
+00:27:08,320 --> 00:27:10,400
+can create things that both me and the
+
+630
+00:27:10,400 --> 00:27:11,919
+agent can use. It's going to be like an
+
+631
+00:27:11,919 --> 00:27:14,720
+agent interface or an agent workspace.
+
+632
+00:27:14,720 --> 00:27:15,679
+And that's what we're going to talk
+
+633
+00:27:15,679 --> 00:27:17,760
+about in the next video. Uh so thank you
+
+634
+00:27:17,760 --> 00:27:20,960
+guys for watching.
