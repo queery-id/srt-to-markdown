@@ -1,0 +1,1799 @@
+1
+00:00:00,000 --> 00:00:05,440
+I use clot more than any other AI but
+
+2
+00:00:02,639 --> 00:00:08,160
+even I dismiss Clark as just for
+
+3
+00:00:05,440 --> 00:00:10,960
+developers and I was wrong after using
+
+4
+00:00:08,160 --> 00:00:12,880
+myself I am completely so and this is
+
+5
+00:00:10,960 --> 00:00:15,679
+too powerful to ignore if you want to
+
+6
+00:00:12,880 --> 00:00:18,240
+use AI to build system and do work for
+
+7
+00:00:15,679 --> 00:00:20,720
+you end to end not just chatting and
+
+8
+00:00:18,240 --> 00:00:23,039
+copy pasting so in this video I'll share
+
+9
+00:00:20,720 --> 00:00:25,439
+how to get started with cloud code even
+
+10
+00:00:23,039 --> 00:00:28,000
+if you don't use for coding and most
+
+11
+00:00:25,439 --> 00:00:30,400
+importantly how to use it to build an AI
+
+12
+00:00:28,000 --> 00:00:33,680
+work team and system that you can
+
+13
+00:00:30,400 --> 00:00:36,640
+actually use. Let's go.
+
+14
+00:00:33,680 --> 00:00:39,360
+So why claw code is even needed if claw
+
+15
+00:00:36,640 --> 00:00:41,280
+is already so powerful. So most people
+
+16
+00:00:39,360 --> 00:00:43,440
+use cloud projects with custom
+
+17
+00:00:41,280 --> 00:00:46,239
+instructions to turn claw into AI
+
+18
+00:00:43,440 --> 00:00:48,960
+agents. But they are silo. You end up
+
+19
+00:00:46,239 --> 00:00:51,520
+copy and pasting between them. You are
+
+20
+00:00:48,960 --> 00:00:53,840
+the coordinator. But with cloud code is
+
+21
+00:00:51,520 --> 00:00:56,640
+different. So these cloud agents share
+
+22
+00:00:53,840 --> 00:00:59,120
+the same workspace access to the same
+
+23
+00:00:56,640 --> 00:01:01,600
+context file. They can talk to each
+
+24
+00:00:59,120 --> 00:01:04,080
+other and hands up work automatically
+
+25
+00:01:01,600 --> 00:01:06,479
+each with their own token context window
+
+26
+00:01:04,080 --> 00:01:08,799
+and claude now becomes the team lead.
+
+27
+00:01:06,479 --> 00:01:10,640
+You give the direction they execute
+
+28
+00:01:08,799 --> 00:01:12,560
+together and that is what we are
+
+29
+00:01:10,640 --> 00:01:14,720
+building today. So each of these cloud
+
+30
+00:01:12,560 --> 00:01:17,200
+code agents you create needs at least
+
+31
+00:01:14,720 --> 00:01:19,360
+three core components all defined in one
+
+32
+00:01:17,200 --> 00:01:21,680
+single markdown file. the role and
+
+33
+00:01:19,360 --> 00:01:24,320
+responsibilities, the knowledge like
+
+34
+00:01:21,680 --> 00:01:26,880
+workflow details, reusable clot agent
+
+35
+00:01:24,320 --> 00:01:28,720
+skills, the MCP tools that they have
+
+36
+00:01:26,880 --> 00:01:31,119
+access to. For this demo, we'll be
+
+37
+00:01:28,720 --> 00:01:33,439
+building a five agent work and claude,
+
+38
+00:01:31,119 --> 00:01:35,920
+our main agent will add as our team lead
+
+39
+00:01:33,439 --> 00:01:38,000
+to coordinate between these agent. A
+
+40
+00:01:35,920 --> 00:01:40,159
+bonus tip is when designing your AI
+
+41
+00:01:38,000 --> 00:01:42,079
+teammate, give them specific and
+
+42
+00:01:40,159 --> 00:01:44,159
+non-over overlapping roles to minimize
+
+43
+00:01:42,079 --> 00:01:45,759
+the potential conflicts. Now, to get
+
+44
+00:01:44,159 --> 00:01:48,159
+started with clark code, there are four
+
+45
+00:01:45,759 --> 00:01:50,079
+main ways to access it. First, the local
+
+46
+00:01:48,159 --> 00:01:52,079
+terminal. This is the raw method and
+
+47
+00:01:50,079 --> 00:01:54,000
+will give you the best experience.
+
+48
+00:01:52,079 --> 00:01:55,920
+Luckily, Anthroporic just launched a
+
+49
+00:01:54,000 --> 00:01:57,920
+native installer. So, which makes it
+
+50
+00:01:55,920 --> 00:02:00,079
+really easy to install. I'll put the
+
+51
+00:01:57,920 --> 00:02:02,799
+official link below. And second, ID
+
+52
+00:02:00,079 --> 00:02:05,360
+extension. So, you can add CL code to ID
+
+53
+00:02:02,799 --> 00:02:07,360
+like VS Code or Kursa and let you run
+
+54
+00:02:05,360 --> 00:02:09,599
+the CL code and see the project file
+
+55
+00:02:07,360 --> 00:02:11,440
+structure side by side. Third, the cloud
+
+56
+00:02:09,599 --> 00:02:13,599
+web app where you can click the code tab
+
+57
+00:02:11,440 --> 00:02:15,440
+and run the CL code in the cloud, but it
+
+58
+00:02:13,599 --> 00:02:17,840
+requires you linking to a GitHub
+
+59
+00:02:15,440 --> 00:02:20,000
+repository. and fourth, cloud desktop
+
+60
+00:02:17,840 --> 00:02:22,160
+app which has cloud code built-in and
+
+61
+00:02:20,000 --> 00:02:23,920
+this is what we'll be using today. Now,
+
+62
+00:02:22,160 --> 00:02:25,680
+whatever way you choose, I still highly
+
+63
+00:02:23,920 --> 00:02:27,760
+recommend installing cloud code through
+
+64
+00:02:25,680 --> 00:02:30,000
+the terminal first because the terminal
+
+65
+00:02:27,760 --> 00:02:32,239
+gives you the most complete experience.
+
+66
+00:02:30,000 --> 00:02:34,160
+All commands and features work fully
+
+67
+00:02:32,239 --> 00:02:36,239
+since we're running Clark locally. So,
+
+68
+00:02:34,160 --> 00:02:38,319
+the first thing is to set up a local
+
+69
+00:02:36,239 --> 00:02:40,720
+project folder. So, think of it like a
+
+70
+00:02:38,319 --> 00:02:42,720
+dedicated workspace for Clark. So, let's
+
+71
+00:02:40,720 --> 00:02:44,720
+say I run a marketing agency and I'm
+
+72
+00:02:42,720 --> 00:02:46,800
+setting up the TIM system. So let's
+
+73
+00:02:44,720 --> 00:02:49,120
+create a folder called marketing team
+
+74
+00:02:46,800 --> 00:02:51,519
+and then I highly recommend to include
+
+75
+00:02:49,120 --> 00:02:54,000
+all useful business context about this
+
+76
+00:02:51,519 --> 00:02:56,080
+agency brand. Then access code using
+
+77
+00:02:54,000 --> 00:02:58,319
+whatever method that you choose. So for
+
+78
+00:02:56,080 --> 00:03:01,519
+our case we will use cloud desktop
+
+79
+00:02:58,319 --> 00:03:03,519
+application. So navigate to Clark pick
+
+80
+00:03:01,519 --> 00:03:06,239
+local as the environment and then pick
+
+81
+00:03:03,519 --> 00:03:08,720
+the folder we just create. Now before we
+
+82
+00:03:06,239 --> 00:03:10,959
+even create any agents the very first
+
+83
+00:03:08,720 --> 00:03:13,599
+step is to initiate this project by
+
+84
+00:03:10,959 --> 00:03:15,519
+creating a cloth.md file. So this is
+
+85
+00:03:13,599 --> 00:03:17,760
+just like a project system prompt. It
+
+86
+00:03:15,519 --> 00:03:19,920
+gives all the important context to cla
+
+87
+00:03:17,760 --> 00:03:21,760
+about what it should know. So ask claw
+
+88
+00:03:19,920 --> 00:03:24,480
+to read the business context file and
+
+89
+00:03:21,760 --> 00:03:26,480
+create a cloth.md file and to build the
+
+90
+00:03:24,480 --> 00:03:28,560
+necessary folder structure. So
+
+91
+00:03:26,480 --> 00:03:30,640
+immediately cloth has created all the
+
+92
+00:03:28,560 --> 00:03:32,879
+folders for this agency brand. And we
+
+93
+00:03:30,640 --> 00:03:34,799
+can even open up an ID to doublech
+
+94
+00:03:32,879 --> 00:03:36,720
+checkck all the folders and the cloth
+
+95
+00:03:34,799 --> 00:03:38,319
+empty file. All right. Now let's build
+
+96
+00:03:36,720 --> 00:03:40,480
+our first teammate the content
+
+97
+00:03:38,319 --> 00:03:43,680
+strategies. So this is the simplest
+
+98
+00:03:40,480 --> 00:03:46,000
+version. No clock scales, no MCP tools,
+
+99
+00:03:43,680 --> 00:03:47,840
+just the basic context file. A key
+
+100
+00:03:46,000 --> 00:03:49,760
+features of clock code is the slash
+
+101
+00:03:47,840 --> 00:03:51,840
+command. So you can type slash to
+
+102
+00:03:49,760 --> 00:03:53,920
+trigger these built-in shortcuts. And
+
+103
+00:03:51,840 --> 00:03:55,760
+there are lots of them and most of them
+
+104
+00:03:53,920 --> 00:03:57,920
+are really for coding purpose. So I
+
+105
+00:03:55,760 --> 00:04:00,959
+won't go through them one by one today.
+
+106
+00:03:57,920 --> 00:04:03,760
+But for agent creation, we need the CLI
+
+107
+00:04:00,959 --> 00:04:06,000
+terminal because the Asian commands is
+
+108
+00:04:03,760 --> 00:04:08,560
+not fully supported in a chat interface
+
+109
+00:04:06,000 --> 00:04:10,720
+yet. So first type claw just to initiate
+
+110
+00:04:08,560 --> 00:04:12,720
+a session. So this way you can trigger
+
+111
+00:04:10,720 --> 00:04:14,799
+the terminal and don't be scared.
+
+112
+00:04:12,720 --> 00:04:17,120
+Basically this is just a raw sections
+
+113
+00:04:14,799 --> 00:04:19,840
+for cloud code and a chat interface is
+
+114
+00:04:17,120 --> 00:04:22,079
+just like a wpper. Now type / agents to
+
+115
+00:04:19,840 --> 00:04:24,639
+trigger the building cloth agent
+
+116
+00:04:22,079 --> 00:04:27,600
+configuration. Then select create new
+
+117
+00:04:24,639 --> 00:04:30,479
+agent. Pick project level agent as this
+
+118
+00:04:27,600 --> 00:04:32,720
+agents is for this project only. Then
+
+119
+00:04:30,479 --> 00:04:35,040
+pick generate with clot. So here you can
+
+120
+00:04:32,720 --> 00:04:37,360
+describe what this agent will do. So in
+
+121
+00:04:35,040 --> 00:04:39,520
+our case, this is a content strategist
+
+122
+00:04:37,360 --> 00:04:42,160
+agent that will do web search and
+
+123
+00:04:39,520 --> 00:04:44,639
+prepare content research documents in MD
+
+124
+00:04:42,160 --> 00:04:47,520
+files. Then select the tools default
+
+125
+00:04:44,639 --> 00:04:49,600
+clock model color for this agent to use.
+
+126
+00:04:47,520 --> 00:04:51,759
+And now we're done. We have create our
+
+127
+00:04:49,600 --> 00:04:53,199
+first clot agents for this work team.
+
+128
+00:04:51,759 --> 00:04:55,680
+And whenever you want to call this
+
+129
+00:04:53,199 --> 00:04:57,600
+agent, just tag this agent name in any
+
+130
+00:04:55,680 --> 00:05:00,400
+cloud code session. So we can double
+
+131
+00:04:57,600 --> 00:05:02,639
+check using the VS code IDE and you will
+
+132
+00:05:00,400 --> 00:05:05,040
+see from the folder it has created the
+
+133
+00:05:02,639 --> 00:05:06,639
+agent under the agents folder. So
+
+134
+00:05:05,040 --> 00:05:08,880
+basically it's just an empty file
+
+135
+00:05:06,639 --> 00:05:10,880
+containing the system prompt defining
+
+136
+00:05:08,880 --> 00:05:13,520
+the role and the capabilities for this
+
+137
+00:05:10,880 --> 00:05:15,039
+agent and you can always change it since
+
+138
+00:05:13,520 --> 00:05:17,360
+this agent will also use different
+
+139
+00:05:15,039 --> 00:05:19,039
+strategy templates. We can also ask it
+
+140
+00:05:17,360 --> 00:05:21,199
+to create all the necessary templates
+
+141
+00:05:19,039 --> 00:05:23,919
+that this agent will use. And this is
+
+142
+00:05:21,199 --> 00:05:26,240
+the power of CL code because it not only
+
+143
+00:05:23,919 --> 00:05:28,639
+created files for you but also put it in
+
+144
+00:05:26,240 --> 00:05:31,280
+the right folder according to this team
+
+145
+00:05:28,639 --> 00:05:33,440
+system structure. So no more copy and
+
+146
+00:05:31,280 --> 00:05:35,280
+paste. Immediately these templates have
+
+147
+00:05:33,440 --> 00:05:38,080
+been created under the template folder
+
+148
+00:05:35,280 --> 00:05:40,400
+like the campaign plan content brief
+
+149
+00:05:38,080 --> 00:05:42,880
+content strategy template. So they are
+
+150
+00:05:40,400 --> 00:05:44,720
+really detailed and this is fantastic.
+
+151
+00:05:42,880 --> 00:05:47,199
+Now to use this agent in a chat
+
+152
+00:05:44,720 --> 00:05:49,600
+interface just tag this agent or just
+
+153
+00:05:47,199 --> 00:05:51,919
+use plain language to specify the agent
+
+154
+00:05:49,600 --> 00:05:54,400
+name and ask it to research the latest
+
+155
+00:05:51,919 --> 00:05:56,479
+SEO challenges and prepare a content
+
+156
+00:05:54,400 --> 00:05:58,639
+brief. So you will see it will trigger
+
+157
+00:05:56,479 --> 00:06:00,720
+different web searches and also reading
+
+158
+00:05:58,639 --> 00:06:02,960
+the content brief template file that it
+
+159
+00:06:00,720 --> 00:06:05,440
+just create and then after a few minutes
+
+160
+00:06:02,960 --> 00:06:08,160
+the content brief is ready and this is
+
+161
+00:06:05,440 --> 00:06:09,840
+super comprehensive and the agent has
+
+162
+00:06:08,160 --> 00:06:11,840
+followed everything stated in the
+
+163
+00:06:09,840 --> 00:06:14,000
+template. So do not just create an
+
+164
+00:06:11,840 --> 00:06:16,800
+agent. Always give it context,
+
+165
+00:06:14,000 --> 00:06:18,880
+templates, resource, standard rules to
+
+166
+00:06:16,800 --> 00:06:20,960
+follow. So it will always produce
+
+167
+00:06:18,880 --> 00:06:22,720
+quality output like this. Now that you
+
+168
+00:06:20,960 --> 00:06:24,880
+have seen how easy it is to build
+
+169
+00:06:22,720 --> 00:06:27,280
+content agents with AI, here is the
+
+170
+00:06:24,880 --> 00:06:29,520
+catch. Consumers have strong opinions
+
+171
+00:06:27,280 --> 00:06:31,520
+about AI generated content. If you want
+
+172
+00:06:29,520 --> 00:06:33,759
+to understand what they actually think
+
+173
+00:06:31,520 --> 00:06:35,440
+and how to implement AI without losing
+
+174
+00:06:33,759 --> 00:06:37,600
+their trust, this free report from
+
+175
+00:06:35,440 --> 00:06:39,520
+HubSpot and Survey Monkey, how brands
+
+176
+00:06:37,600 --> 00:06:42,000
+are earning loyalty in an automated
+
+177
+00:06:39,520 --> 00:06:43,759
+world covers exactly that in detail. You
+
+178
+00:06:42,000 --> 00:06:46,000
+can find the link below based on the
+
+179
+00:06:43,759 --> 00:06:49,199
+data from over 15,000 consumers
+
+180
+00:06:46,000 --> 00:06:51,919
+globally. Only 24% of consumers actually
+
+181
+00:06:49,199 --> 00:06:54,960
+like seeing AI in their emails, ads, or
+
+182
+00:06:51,919 --> 00:06:57,199
+customer support. And 84% want to know
+
+183
+00:06:54,960 --> 00:06:59,520
+when brands are using AI. That is a
+
+184
+00:06:57,199 --> 00:07:01,759
+trust gap you need to close. And what I
+
+185
+00:06:59,520 --> 00:07:03,840
+also found valuable is a section about
+
+186
+00:07:01,759 --> 00:07:05,919
+operational best practices for staying
+
+187
+00:07:03,840 --> 00:07:08,240
+authentic with AI. It gives you five
+
+188
+00:07:05,919 --> 00:07:10,319
+actionable strategies to implement AI
+
+189
+00:07:08,240 --> 00:07:11,680
+without losing the human connection.
+
+190
+00:07:10,319 --> 00:07:13,360
+Download this for free in the
+
+191
+00:07:11,680 --> 00:07:15,520
+description. And thank you HubSpot and
+
+192
+00:07:13,360 --> 00:07:17,120
+Survey Monkey for sponsoring this video.
+
+193
+00:07:15,520 --> 00:07:19,680
+All right, let's create our second
+
+194
+00:07:17,120 --> 00:07:22,080
+agent, a presentation specialist. And
+
+195
+00:07:19,680 --> 00:07:24,080
+this time, let's also add clock agent
+
+196
+00:07:22,080 --> 00:07:26,240
+skills. So skills are just like a
+
+197
+00:07:24,080 --> 00:07:28,560
+reusable instruction manual that tells
+
+198
+00:07:26,240 --> 00:07:30,400
+claw how to execute your task and
+
+199
+00:07:28,560 --> 00:07:32,800
+particularly for this agent we'll use
+
+200
+00:07:30,400 --> 00:07:34,880
+the official document creation skills.
+
+201
+00:07:32,800 --> 00:07:37,360
+So enthrop provide a list of official
+
+202
+00:07:34,880 --> 00:07:39,919
+skills but they are not pre-built inside
+
+203
+00:07:37,360 --> 00:07:42,479
+clock. So you can go to this official
+
+204
+00:07:39,919 --> 00:07:44,639
+skills GitHub repository and the easiest
+
+205
+00:07:42,479 --> 00:07:47,360
+and reliable way is to use the building
+
+206
+00:07:44,639 --> 00:07:50,319
+plug-in command inside clock. So type
+
+207
+00:07:47,360 --> 00:07:53,039
+/plugin and register the official skill
+
+208
+00:07:50,319 --> 00:07:55,120
+repository and then install the document
+
+209
+00:07:53,039 --> 00:07:58,000
+skills and also I recommend to install
+
+210
+00:07:55,120 --> 00:08:00,400
+the example skills to enable all other
+
+211
+00:07:58,000 --> 00:08:02,160
+official skills as well. Then we can use
+
+212
+00:08:00,400 --> 00:08:04,400
+this prompt to double confirm these
+
+213
+00:08:02,160 --> 00:08:06,639
+skills are successfully made available
+
+214
+00:08:04,400 --> 00:08:09,039
+inside cloud code. Now again use the
+
+215
+00:08:06,639 --> 00:08:11,680
+embedded terminal inside cloud desktop
+
+216
+00:08:09,039 --> 00:08:13,599
+and use the agent configuration mode to
+
+217
+00:08:11,680 --> 00:08:16,080
+create these presentation specialist
+
+218
+00:08:13,599 --> 00:08:19,199
+agent. This agent will transform all the
+
+219
+00:08:16,080 --> 00:08:21,360
+data into pawn slide decks. Note I also
+
+220
+00:08:19,199 --> 00:08:23,440
+specify the brand color palettes here.
+
+221
+00:08:21,360 --> 00:08:25,680
+So this agent will always follow these
+
+222
+00:08:23,440 --> 00:08:28,080
+color tone when generating the slides.
+
+223
+00:08:25,680 --> 00:08:29,840
+Then quickly we have our second agent
+
+224
+00:08:28,080 --> 00:08:32,000
+builds. So let's say we have this
+
+225
+00:08:29,840 --> 00:08:34,479
+performing data set inside this data
+
+226
+00:08:32,000 --> 00:08:36,800
+folder. Then we can just tag this agent
+
+227
+00:08:34,479 --> 00:08:39,039
+name and then ask it to create a
+
+228
+00:08:36,800 --> 00:08:40,719
+presentation deck for this file under
+
+229
+00:08:39,039 --> 00:08:42,800
+our folder. And if you're using the
+
+230
+00:08:40,719 --> 00:08:45,279
+terminal, you can just simply tag the
+
+231
+00:08:42,800 --> 00:08:47,440
+file path which will be much easier. Now
+
+232
+00:08:45,279 --> 00:08:50,720
+it triggers the document creation skills
+
+233
+00:08:47,440 --> 00:08:52,640
+that we have in store and out of film it
+
+234
+00:08:50,720 --> 00:08:55,279
+create a performance report presentation
+
+235
+00:08:52,640 --> 00:08:57,360
+for us with 10 slides. So it is quite
+
+236
+00:08:55,279 --> 00:08:59,920
+decent and is using the color scheme
+
+237
+00:08:57,360 --> 00:09:02,880
+that we have defined with the color box
+
+238
+00:08:59,920 --> 00:09:05,200
+charts graphs for storytelling. Although
+
+239
+00:09:02,880 --> 00:09:07,120
+it's not using very sophisticated
+
+240
+00:09:05,200 --> 00:09:09,519
+graphics, it's definitely ready to
+
+241
+00:09:07,120 --> 00:09:11,519
+present and with minimal adjustment. And
+
+242
+00:09:09,519 --> 00:09:14,560
+so perhaps maybe you have different data
+
+243
+00:09:11,519 --> 00:09:16,640
+sets, documents, reports. You don't even
+
+244
+00:09:14,560 --> 00:09:19,040
+need to upload them. You can just put
+
+245
+00:09:16,640 --> 00:09:21,279
+them inside a folder and then let claw
+
+246
+00:09:19,040 --> 00:09:23,120
+to scan and load them and call this
+
+247
+00:09:21,279 --> 00:09:25,600
+agent to build the deck for you. All
+
+248
+00:09:23,120 --> 00:09:27,680
+right, our third agent which is a data
+
+249
+00:09:25,600 --> 00:09:30,800
+analyst. So this time we'll be adding
+
+250
+00:09:27,680 --> 00:09:33,440
+MCP tools. So MCP less clock connect to
+
+251
+00:09:30,800 --> 00:09:36,000
+external system and retrieve live data
+
+252
+00:09:33,440 --> 00:09:38,399
+or context and this is where your AI
+
+253
+00:09:36,000 --> 00:09:40,480
+team become truly powerful. So first we
+
+254
+00:09:38,399 --> 00:09:42,560
+need to install all the necessary MCB
+
+255
+00:09:40,480 --> 00:09:44,320
+server and make them available on cloud
+
+256
+00:09:42,560 --> 00:09:46,080
+code. So if you have been using cloud
+
+257
+00:09:44,320 --> 00:09:48,720
+desktop you probably already have a list
+
+258
+00:09:46,080 --> 00:09:50,880
+of MCB servers connected. So the easiest
+
+259
+00:09:48,720 --> 00:09:52,959
+way is to input them through the local
+
+260
+00:09:50,880 --> 00:09:55,200
+terminal. So we need to use the
+
+261
+00:09:52,959 --> 00:09:57,839
+computer's local terminal is because the
+
+262
+00:09:55,200 --> 00:10:00,560
+embedded one in the clock desktop does
+
+263
+00:09:57,839 --> 00:10:03,120
+not support this import command. So open
+
+264
+00:10:00,560 --> 00:10:06,080
+the terminal application. So navigate to
+
+265
+00:10:03,120 --> 00:10:09,680
+our project folder path using this cd
+
+266
+00:10:06,080 --> 00:10:12,320
+command. Then use this command mcp at
+
+267
+00:10:09,680 --> 00:10:14,800
+from clot desktop to import the mcp
+
+268
+00:10:12,320 --> 00:10:17,519
+servers that you want. So in this case I
+
+269
+00:10:14,800 --> 00:10:20,959
+have import three mcp servers. Notion
+
+270
+00:10:17,519 --> 00:10:22,959
+hrefs j4. notes depending on the MCP
+
+271
+00:10:20,959 --> 00:10:25,440
+server that you install some of them
+
+272
+00:10:22,959 --> 00:10:27,519
+might require further authentication
+
+273
+00:10:25,440 --> 00:10:30,079
+before you can use them on cloud code
+
+274
+00:10:27,519 --> 00:10:32,720
+and to confirm it's already installed go
+
+275
+00:10:30,079 --> 00:10:35,839
+back to cloud desktop open the terminal
+
+276
+00:10:32,720 --> 00:10:38,560
+type /mcp and we can see all the three
+
+277
+00:10:35,839 --> 00:10:40,959
+MCP servers are available now repeat the
+
+278
+00:10:38,560 --> 00:10:43,519
+same process to build this data analyst
+
+279
+00:10:40,959 --> 00:10:46,079
+agent with the agent command so this
+
+280
+00:10:43,519 --> 00:10:49,040
+agent will connect to J4 through the MCP
+
+281
+00:10:46,079 --> 00:10:51,440
+tool and create parnish interactive HTML
+
+282
+00:10:49,040 --> 00:10:53,519
+dashboard and again we will use the same
+
+283
+00:10:51,440 --> 00:10:56,079
+brand color palettes to keep everything
+
+284
+00:10:53,519 --> 00:10:58,320
+on brand and then now we have three
+
+285
+00:10:56,079 --> 00:11:00,880
+agents in a team. So let's test this
+
+286
+00:10:58,320 --> 00:11:02,880
+agent to analyze our website performance
+
+287
+00:11:00,880 --> 00:11:05,519
+and build a dashboard. So it's now
+
+288
+00:11:02,880 --> 00:11:08,160
+calling the J4 MCB server to retrieve
+
+289
+00:11:05,519 --> 00:11:10,560
+the data and quickly it has built us a
+
+290
+00:11:08,160 --> 00:11:12,560
+dashboard with the photo path. So it is
+
+291
+00:11:10,560 --> 00:11:15,120
+in the same brand color we have
+
+292
+00:11:12,560 --> 00:11:18,079
+specified with the executive summary,
+
+293
+00:11:15,120 --> 00:11:20,560
+key metrics boxes, interactive charts,
+
+294
+00:11:18,079 --> 00:11:22,800
+trend lines and this is what club really
+
+295
+00:11:20,560 --> 00:11:25,040
+excels at about strategic storytelling
+
+296
+00:11:22,800 --> 00:11:27,200
+and insights. Then we can even export
+
+297
+00:11:25,040 --> 00:11:29,040
+this directly as a PDF file which is
+
+298
+00:11:27,200 --> 00:11:31,360
+ready to send out to the team for quick
+
+299
+00:11:29,040 --> 00:11:33,279
+sharing. Now let's level up further. So
+
+300
+00:11:31,360 --> 00:11:35,760
+we'll create custom skills that make our
+
+301
+00:11:33,279 --> 00:11:38,000
+agents even more brand specific. And
+
+302
+00:11:35,760 --> 00:11:40,160
+then we'll build a fourth agent, a
+
+303
+00:11:38,000 --> 00:11:42,320
+social media specialist who will use
+
+304
+00:11:40,160 --> 00:11:44,000
+these custom skills. So let's create a
+
+305
+00:11:42,320 --> 00:11:46,000
+custom skills called branded social
+
+306
+00:11:44,000 --> 00:11:48,160
+visuals which will be used for creating
+
+307
+00:11:46,000 --> 00:11:50,480
+branded social graphics. So upload some
+
+308
+00:11:48,160 --> 00:11:52,560
+visual example for cloth and then ask it
+
+309
+00:11:50,480 --> 00:11:54,720
+to read the official canvas design
+
+310
+00:11:52,560 --> 00:11:58,000
+skills and extend it for visual
+
+311
+00:11:54,720 --> 00:12:00,880
+creations with the specified brand color
+
+312
+00:11:58,000 --> 00:12:02,959
+layout style for this agency brand. So
+
+313
+00:12:00,880 --> 00:12:05,760
+now it triggers the official skills
+
+314
+00:12:02,959 --> 00:12:08,160
+creator we have enabled and studies the
+
+315
+00:12:05,760 --> 00:12:10,639
+canvas design skills and then extends it
+
+316
+00:12:08,160 --> 00:12:13,120
+and create a new custom skills following
+
+317
+00:12:10,639 --> 00:12:15,760
+the official structure. And from the ID
+
+318
+00:12:13,120 --> 00:12:18,240
+explorer we can also see a new skill MD
+
+319
+00:12:15,760 --> 00:12:20,480
+file is generated. And so using this
+
+320
+00:12:18,240 --> 00:12:22,800
+same method, we can create a few more
+
+321
+00:12:20,480 --> 00:12:25,279
+custom skills perhaps like a keyword
+
+322
+00:12:22,800 --> 00:12:28,160
+research skills that we call the HF's
+
+323
+00:12:25,279 --> 00:12:30,320
+MCP and LLM optimized the blog writer
+
+324
+00:12:28,160 --> 00:12:32,800
+skills that generate AI search friendly
+
+325
+00:12:30,320 --> 00:12:34,800
+blog and a custom brand voice skills. So
+
+326
+00:12:32,800 --> 00:12:37,519
+if you want to learn how to build these
+
+327
+00:12:34,800 --> 00:12:39,760
+custom skills, go check out this video.
+
+328
+00:12:37,519 --> 00:12:42,240
+So let's see this in action with the
+
+329
+00:12:39,760 --> 00:12:45,440
+social media specialist agent which will
+
+330
+00:12:42,240 --> 00:12:47,920
+use this custom skills and a notion MCP.
+
+331
+00:12:45,440 --> 00:12:49,920
+So we can give it some topic ideas and
+
+332
+00:12:47,920 --> 00:12:52,240
+ask it to drop the post copy with
+
+333
+00:12:49,920 --> 00:12:54,240
+visuals and schedule them on our notion
+
+334
+00:12:52,240 --> 00:12:56,320
+calendar. So it is now calling the
+
+335
+00:12:54,240 --> 00:12:58,399
+branded social visual skill we just
+
+336
+00:12:56,320 --> 00:13:01,040
+create for visual creation and then
+
+337
+00:12:58,399 --> 00:13:03,200
+calls the notion MCP to upload all the
+
+338
+00:13:01,040 --> 00:13:05,279
+post details to our calendar. And now
+
+339
+00:13:03,200 --> 00:13:07,279
+all the visuals have been created under
+
+340
+00:13:05,279 --> 00:13:09,360
+this folder. Although these visuals are
+
+341
+00:13:07,279 --> 00:13:11,200
+not that fancy, it's also not cloth
+
+342
+00:13:09,360 --> 00:13:13,519
+strain, but definitely you can see
+
+343
+00:13:11,200 --> 00:13:15,440
+everything is on brand using the brand
+
+344
+00:13:13,519 --> 00:13:18,320
+color pallets and with the brand test
+
+345
+00:13:15,440 --> 00:13:20,800
+logo. So these workflow automation is
+
+346
+00:13:18,320 --> 00:13:23,360
+100% working. And you can always let
+
+347
+00:13:20,800 --> 00:13:25,920
+claw use all the image generation model
+
+348
+00:13:23,360 --> 00:13:28,399
+perhaps Gemini Nano Banana for more
+
+349
+00:13:25,920 --> 00:13:30,560
+stunning visual images. And claw also
+
+350
+00:13:28,399 --> 00:13:32,720
+successfully schedule all these posts on
+
+351
+00:13:30,560 --> 00:13:35,040
+the notion content calendar following
+
+352
+00:13:32,720 --> 00:13:38,240
+our posting schedule with the platform
+
+353
+00:13:35,040 --> 00:13:41,120
+details, posting status, postcopy,
+
+354
+00:13:38,240 --> 00:13:43,519
+hashtag. So this is what make clock so
+
+355
+00:13:41,120 --> 00:13:45,760
+powerful. Everything can be done like in
+
+356
+00:13:43,519 --> 00:13:48,639
+30 minutes. Now we have built our AI
+
+357
+00:13:45,760 --> 00:13:50,880
+team. Four agents you have seen plus an
+
+358
+00:13:48,639 --> 00:13:52,800
+SEO content specialist I created the
+
+359
+00:13:50,880 --> 00:13:55,120
+same way. So here comes the most
+
+360
+00:13:52,800 --> 00:13:58,240
+exciting part is watching them working
+
+361
+00:13:55,120 --> 00:14:00,399
+together. But before we do that, Clot
+
+362
+00:13:58,240 --> 00:14:02,800
+needs to know when and who to delegate
+
+363
+00:14:00,399 --> 00:14:04,639
+it to. So remember the clock empty file
+
+364
+00:14:02,800 --> 00:14:07,199
+we created in the very first step. So
+
+365
+00:14:04,639 --> 00:14:09,680
+the key here is to ask claw to review
+
+366
+00:14:07,199 --> 00:14:12,320
+all the agents in this workspace and
+
+367
+00:14:09,680 --> 00:14:14,720
+then update that clock.md file with the
+
+368
+00:14:12,320 --> 00:14:16,880
+agent routing rules. So these are the
+
+369
+00:14:14,720 --> 00:14:19,199
+instructions that tell claw which agent
+
+370
+00:14:16,880 --> 00:14:21,120
+to call for different tasks and what are
+
+371
+00:14:19,199 --> 00:14:23,040
+the trigger phrase and this is an
+
+372
+00:14:21,120 --> 00:14:25,279
+important step to make the whole system
+
+373
+00:14:23,040 --> 00:14:27,279
+work. So now it has add these routing
+
+374
+00:14:25,279 --> 00:14:30,160
+rules that define when it should
+
+375
+00:14:27,279 --> 00:14:32,560
+delegate to this agent and it even add a
+
+376
+00:14:30,160 --> 00:14:34,720
+section for the multi- aent workflow
+
+377
+00:14:32,560 --> 00:14:37,040
+which is amazing and let's test it with
+
+378
+00:14:34,720 --> 00:14:39,279
+a multi- aent workflow. So we will ask
+
+379
+00:14:37,040 --> 00:14:41,519
+it to do content research about a
+
+380
+00:14:39,279 --> 00:14:44,480
+content topic and then create a blog
+
+381
+00:14:41,519 --> 00:14:46,639
+post and also a presentation deck based
+
+382
+00:14:44,480 --> 00:14:49,120
+on this content research findings. And
+
+383
+00:14:46,639 --> 00:14:51,600
+that means both the blog writing and
+
+384
+00:14:49,120 --> 00:14:54,079
+presentation task will depend on the
+
+385
+00:14:51,600 --> 00:14:56,160
+first task of content research. So you
+
+386
+00:14:54,079 --> 00:14:58,880
+can see it start with the first task and
+
+387
+00:14:56,160 --> 00:15:00,720
+cause the content strategist agent to do
+
+388
+00:14:58,880 --> 00:15:03,199
+the research through the web search. So
+
+389
+00:15:00,720 --> 00:15:05,279
+once the task has been complete, it now
+
+390
+00:15:03,199 --> 00:15:08,560
+move on to the next task for the blog
+
+391
+00:15:05,279 --> 00:15:10,880
+post creation and dedicate to our SEO
+
+392
+00:15:08,560 --> 00:15:12,880
+content specialist and the agent now
+
+393
+00:15:10,880 --> 00:15:15,920
+triggers the keyword research skills
+
+394
+00:15:12,880 --> 00:15:18,160
+that cause the HFS MCP and then it also
+
+395
+00:15:15,920 --> 00:15:20,240
+triggers the block writing and document
+
+396
+00:15:18,160 --> 00:15:22,880
+skills for the actual blog content
+
+397
+00:15:20,240 --> 00:15:24,959
+creation. Now it move on to the client
+
+398
+00:15:22,880 --> 00:15:27,519
+presentation task and calls the
+
+399
+00:15:24,959 --> 00:15:29,600
+presentation agent which will use the
+
+400
+00:15:27,519 --> 00:15:31,360
+PowerPoint creation skills. So all the
+
+401
+00:15:29,600 --> 00:15:33,279
+tasks have been done and claw is just
+
+402
+00:15:31,360 --> 00:15:35,519
+like your team lead give you the summary
+
+403
+00:15:33,279 --> 00:15:38,000
+for all the deliverables and the agents
+
+404
+00:15:35,519 --> 00:15:40,320
+that it use. So first the content brief
+
+405
+00:15:38,000 --> 00:15:42,399
+about the topic backed by research that
+
+406
+00:15:40,320 --> 00:15:44,639
+is really detailed and follows the
+
+407
+00:15:42,399 --> 00:15:46,959
+predefined format which is a great
+
+408
+00:15:44,639 --> 00:15:49,279
+starting point and then the blog post is
+
+409
+00:15:46,959 --> 00:15:51,600
+pretty impressive as well. So following
+
+410
+00:15:49,279 --> 00:15:53,759
+all the required formats to make it AI
+
+411
+00:15:51,600 --> 00:15:56,079
+search friendly, use of bullet points,
+
+412
+00:15:53,759 --> 00:15:58,480
+FAQ sections and I particularly like
+
+413
+00:15:56,079 --> 00:16:00,639
+this section about the 10 common pricing
+
+414
+00:15:58,480 --> 00:16:03,360
+mistake which is great for AI search
+
+415
+00:16:00,639 --> 00:16:05,600
+engines and what is amazing is I can see
+
+416
+00:16:03,360 --> 00:16:07,759
+this blog is following the content brief
+
+417
+00:16:05,600 --> 00:16:10,560
+done by the other agent the content
+
+418
+00:16:07,759 --> 00:16:12,800
+structure talking points and has almost
+
+419
+00:16:10,560 --> 00:16:15,440
+5,000 words and you can further enhance
+
+420
+00:16:12,800 --> 00:16:17,920
+it perhaps also like claw to upload for
+
+421
+00:16:15,440 --> 00:16:19,759
+you to your final CMS platform and if
+
+422
+00:16:17,920 --> 00:16:21,759
+you want any of your blog documents to
+
+423
+00:16:19,759 --> 00:16:23,519
+match your branding and formatting. You
+
+424
+00:16:21,759 --> 00:16:25,600
+can always create custom branded skills
+
+425
+00:16:23,519 --> 00:16:27,680
+that use your branded template like how
+
+426
+00:16:25,600 --> 00:16:30,000
+we did just now. And for the deck is
+
+427
+00:16:27,680 --> 00:16:32,000
+also using our branded theme. So
+
+428
+00:16:30,000 --> 00:16:34,560
+everything is on brand and the content
+
+429
+00:16:32,000 --> 00:16:36,480
+is also using the same content research
+
+430
+00:16:34,560 --> 00:16:38,720
+findings. So basically all the
+
+431
+00:16:36,480 --> 00:16:41,120
+deliverables are coherent and aligned to
+
+432
+00:16:38,720 --> 00:16:44,000
+deliver the same story and this is the
+
+433
+00:16:41,120 --> 00:16:46,160
+true AI orchestration in action. And now
+
+434
+00:16:44,000 --> 00:16:48,880
+we have different Asians to achieve a
+
+435
+00:16:46,160 --> 00:16:50,639
+big task and execute agentic workflows
+
+436
+00:16:48,880 --> 00:16:52,560
+like this. All right, there are still so
+
+437
+00:16:50,639 --> 00:16:54,959
+many possibilities and use cases with
+
+438
+00:16:52,560 --> 00:16:56,720
+Plco. If there are any other topics I
+
+439
+00:16:54,959 --> 00:16:59,040
+should cover more, let me know in the
+
+440
+00:16:56,720 --> 00:17:01,440
+comments. And if you enjoy this video,
+
+441
+00:16:59,040 --> 00:17:03,759
+please also give me a thumbs up. I also
+
+442
+00:17:01,440 --> 00:17:06,000
+invite you to join our community. Every
+
+443
+00:17:03,759 --> 00:17:07,919
+month we have deep dive workshop and you
+
+444
+00:17:06,000 --> 00:17:09,839
+will unlock all the prom resources I
+
+445
+00:17:07,919 --> 00:17:12,000
+share on this channel, including this
+
+446
+00:17:09,839 --> 00:17:13,919
+one. I hope to see you there. And before
+
+447
+00:17:12,000 --> 00:17:16,319
+you go, also watch this video about
+
+448
+00:17:13,919 --> 00:17:18,480
+clock skills and learn how to apply them
+
+449
+00:17:16,319 --> 00:17:22,760
+in designing your clock agents and
+
+450
+00:17:18,480 --> 00:17:22,760
+system. I will see you next time.
