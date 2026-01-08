@@ -646,16 +646,28 @@ Examples:
     
     args = parser.parse_args()
     
-    input_path = Path(args.input)
-    output_path = Path(args.output)
-    
     # YouTube Mode
     if args.youtube:
         print("=" * 60)
         print("🎥 YouTube to Knowledge Base Converter v3.0")
         print("   For Custom GPT Training")
         print("=" * 60)
-        print(f"📁 Input:  {input_path}")
+        
+        # Interactive input if no argument provided
+        if args.input == DEFAULT_INPUT:
+            print("\n📂 Enter input folder path (folder containing video subtitle files):")
+            print("   Example: C:\\Users\\HYPE\\Downloads\\Claude Code")
+            user_input = input("   Path: ").strip().strip('"')
+            
+            if not user_input:
+                print("\n❌ Error: No input path provided")
+                return
+            
+            input_path = Path(user_input)
+        else:
+            input_path = Path(args.input)
+        
+        print(f"\n📁 Input:  {input_path}")
         
         if not input_path.exists():
             print(f"\n❌ Error: Input folder not found: {input_path}")
@@ -674,6 +686,10 @@ Examples:
             print("\n❌ No SRT files found in the folder")
         
         return
+    
+    # Course Mode - set paths
+    input_path = Path(args.input)
+    output_path = Path(args.output)
     
     # Course Mode (default)
     print("=" * 60)
