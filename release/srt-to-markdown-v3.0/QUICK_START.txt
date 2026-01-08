@@ -1,0 +1,77 @@
+═══════════════════════════════════════════════════════════
+ SRT to Markdown Converter v3.0 - Quick Start
+═══════════════════════════════════════════════════════════
+
+🚀 QUICK START:
+
+1. COURSE MODE (Udemy, Coursera, LinkedIn Learning):
+   srt-to-markdown.exe -i "C:\Path\To\Courses"
+
+2. YOUTUBE MODE (Video Collections):
+   srt-to-markdown.exe --youtube -i "C:\Path\To\Videos"
+
+3. INTERACTIVE MODE:
+   srt-to-markdown.exe --youtube
+   (Script will prompt for folder path)
+
+═══════════════════════════════════════════════════════════
+📚 EXAMPLES:
+═══════════════════════════════════════════════════════════
+
+Course Mode - All courses:
+  srt-to-markdown.exe
+
+Course Mode - Custom input:
+  srt-to-markdown.exe -i "D:\MyCourses"
+
+Course Mode - Single course:
+  srt-to-markdown.exe -c "SQL Bootcamp"
+
+YouTube Mode - Interactive:
+  srt-to-markdown.exe --youtube
+
+YouTube Mode - Direct:
+  srt-to-markdown.exe --youtube -i "D:\YouTube\Claude Code"
+
+═══════════════════════════════════════════════════════════
+📁 FOLDER STRUCTURE:
+═══════════════════════════════════════════════════════════
+
+Course Mode Input:
+  Courses/
+  ├── Course 1/
+  │   ├── Section 1/
+  │   │   └── Lecture.srt
+  │   └── Section 2/
+  └── Course 2/
+
+YouTube Mode Input:
+  Topic Folder/
+  ├── video1.srt
+  ├── video2.txt
+  └── video3.srt
+
+Output:
+  - Course Mode: output/CourseName.md
+  - YouTube Mode: TopicFolder/TopicName.md (same folder)
+
+═══════════════════════════════════════════════════════════
+💡 TIPS:
+═══════════════════════════════════════════════════════════
+
+- Supports .srt and .txt subtitle files
+- No Python installation required
+- Works on Windows 10/11
+- Output format: Markdown (.md)
+- Perfect for NotebookLM, Custom GPT, Obsidian
+
+═══════════════════════════════════════════════════════════
+📖 FULL DOCUMENTATION:
+═══════════════════════════════════════════════════════════
+
+See README.md for complete documentation
+See TESTING_GUIDE.md for testing examples
+
+GitHub: https://github.com/queery-id/srt-to-markdown
+
+═══════════════════════════════════════════════════════════
