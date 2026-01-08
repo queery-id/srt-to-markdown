@@ -601,7 +601,18 @@ def process_youtube_collection(folder_path: Path) -> Optional[Path]:
     return output_file
 
 
-def main():
+def main(interactive_mode=True):
+    """
+    Main processing function.
+    
+    Args:
+        interactive_mode: If True, shows interactive menu when no args provided
+        
+    Returns:
+        True if processing completed successfully
+        False if user chose to exit
+        None for command-line mode
+    """
     parser = argparse.ArgumentParser(
         description="Convert SRT tutorial files to Markdown for NotebookLM",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -648,7 +659,7 @@ Examples:
     args = parser.parse_args()
     
     # Interactive Mode - Show menu if no arguments provided
-    if len(sys.argv) == 1:  # No arguments provided
+    if interactive_mode and len(sys.argv) == 1:  # No arguments provided
         print("=" * 60)
         print("🎬 SRT to Markdown Converter v3.0")
         print("=" * 60)
@@ -662,12 +673,12 @@ Examples:
         
         if choice == "3":
             print("\n👋 Goodbye!")
-            return
+            return False  # Signal to exit the loop
         elif choice == "2":
             args.youtube = True
         elif choice != "1":
-            print("\n❌ Invalid choice. Exiting.")
-            return
+            print("\n❌ Invalid choice.")
+            return False  # Signal to exit the loop
         
         # Get input folder
         print("\n📂 Enter input folder path:")
@@ -682,7 +693,7 @@ Examples:
             args.input = user_input
         elif args.youtube:
             print("\n❌ Error: YouTube mode requires an input path")
-            return
+            return False
         
         print()
     
@@ -699,7 +710,7 @@ Examples:
         
         if not input_path.exists():
             print(f"\n❌ Error: Input folder not found: {input_path}")
-            return
+            return False
         
         # Process the folder as a YouTube collection
         result = process_youtube_collection(input_path)
@@ -713,7 +724,7 @@ Examples:
         else:
             print("\n❌ No SRT files found in the folder")
         
-        return
+        return True  # YouTube mode completed
     
     # Course Mode - set paths
     input_path = Path(args.input)
@@ -765,7 +776,51 @@ Examples:
         print("\n📄 Generated files:")
         for f in processed:
             print(f"   - {f.name}")
+    
+    return True  # Course mode completed
+
+
+def run():
+    """Main entry point with continuous processing loop."""
+    # Check if running with command-line arguments
+    has_args = len(sys.argv) > 1
+    
+    while True:
+        try:
+            # Run main processing
+            should_continue = main(interactive_mode=not has_args)
+            
+            # If command-line mode, exit after one run
+            if has_args:
+                break
+            
+            # If main() returned False (user chose Exit), break
+            if should_continue is False:
+                break
+            
+            # Ask if user wants to process another
+            print("\n" + "=" * 60)
+            choice = input("\n🔄 Process another? (Y/N): ").strip().upper()
+            
+            if choice != 'Y':
+                print("\n👋 Thank you for using SRT to Markdown Converter!")
+                print("=" * 60)
+                break
+            
+            print("\n")  # Add spacing before next run
+            
+        except KeyboardInterrupt:
+            print("\n\n👋 Interrupted by user. Goodbye!")
+            break
+        except Exception as e:
+            print(f"\n❌ Error: {e}")
+            if has_args:
+                break
+            
+            choice = input("\n🔄 Try again? (Y/N): ").strip().upper()
+            if choice != 'Y':
+                break
 
 
 if __name__ == "__main__":
-    main()
+    run()
